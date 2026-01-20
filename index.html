@@ -7,13 +7,13 @@
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Gym P2 | Fitness e Bem-Estar</title>
-  <link rel="stylesheet" href="menu-inicial.css">
+    <link rel="stylesheet" href="menu-inicial.css">
 </head>
 <body>
-  <header class="header-container" id="menu">
+    <header class="header-container" id="menu">
         <div class="nav-wrapper">
             <div class="brand-container">
-                <a href="#"><img src="logo.png" alt="Logo" class="logo-img"></a>    
+                <a href="#"><img src="logo.png" alt="Logo" class="logo-img"></a>
             </div>
             <div class="right-controls">
                 <div class="search-widget" id="searchWidget">
@@ -27,9 +27,9 @@
                     </button>
                     <div class="search-results" id="searchResults"></div>
                 </div>  
-                <button class="gym-access-btn"><a href="index.html">Home</a></button>
-                <button class="gym-access-btn"><a href="academias-publicas.html">Academias</a></button>
-                <button class="gym-access-btn"><a href="login-gym.html">Login</a></button>
+                <a href="index.html"><button class="gym-access-btn"><i class="fas fa-home"></i> Home</button></a>
+                <a href="academias-publicas.html"><button class="gym-access-btn"><i class="fas fa-dumbbell"></i> Academias</button></a>
+                <a href="login-gym.html"><button class="gym-access-btn"><i class="fas fa-sign-in-alt"></i> Login</button></a>
                 <button class="menu-trigger" id="menuTrigger" aria-label="Abrir menu">
                     <div class="hamburger-line"></div>
                     <div class="hamburger-line"></div>
@@ -38,140 +38,6 @@
             </div>
         </div>
     </header>
-    <!-- NO TOPO DO perfil.html, DEPOIS DO HEADER -->
-<div id="deletionWarningBanner" style="display: none; margin: 10px 20px;">
-    <div style="background: linear-gradient(90deg, #ff9500, #ff5e00); 
-                color: white; padding: 12px 20px; border-radius: 8px; 
-                text-align: center; position: relative;">
-        <strong>⚠️ CONTA AGENDADA PARA EXCLUSÃO</strong>
-        <p style="margin: 5px 0; font-size: 14px;">
-            Sua conta será excluída em <span id="profileDaysRemaining">X</span> dias.
-            <a href="config.html" style="color: #00ff40; text-decoration: underline; margin-left: 10px;">
-                Clique aqui para cancelar
-            </a>
-        </p>
-        <button onclick="closeWarningBanner()" 
-                style="position: absolute; right: 10px; top: 10px; 
-                       background: rgba(255,255,255,0.2); border: none; 
-                       color: white; border-radius: 50%; width: 24px; height: 24px; 
-                       cursor: pointer; font-size: 16px;">×</button>
-    </div>
-</div>
-
-<script>
-// Adicionar este script no perfil.html
-document.addEventListener('DOMContentLoaded', async function() {
-    console.log('📋 Página do perfil carregada');
-    await checkAccountDeletionStatus();
-});
-
-async function checkAccountDeletionStatus() {
-    try {
-        console.log('🔍 Verificando status de exclusão da conta...');
-        
-        // Verificar primeiro no localStorage (sistema simulado)
-        const savedStatus = localStorage.getItem('gymp2_deletion_status');
-        
-        if (savedStatus) {
-            console.log('📁 Status encontrado no localStorage');
-            const statusData = JSON.parse(savedStatus);
-            
-            if (statusData.hasPendingDeletion && statusData.deletionRecord) {
-                const banner = document.getElementById('deletionWarningBanner');
-                const daysSpan = document.getElementById('profileDaysRemaining');
-                
-                if (banner && daysSpan) {
-                    const daysRemaining = statusData.deletionRecord.daysRemaining || 0;
-                    daysSpan.textContent = daysRemaining;
-                    banner.style.display = 'block';
-                    
-                    console.log(`⚠️ Exclusão pendente: ${daysRemaining} dias restantes`);
-                    
-                    // Se restarem menos de 5 dias, alerta mais visível
-                    if (daysRemaining <= 5) {
-                        banner.querySelector('div').style.background = 'linear-gradient(90deg, #ff3b30, #ff1a00)';
-                    }
-                    
-                    return;
-                }
-            }
-        }
-        
-        // Se chegou aqui, não há exclusão pendente ou não encontrou os elementos
-        console.log('✅ Nenhuma exclusão pendente encontrada');
-        
-        // CASO QUEIRA USAR API REAL (descomente e ajuste):
-        /*
-        const token = localStorage.getItem('gymp2_token') || 
-                     sessionStorage.getItem('gymp2_token');
-        
-        if (!token) {
-            console.log('❌ Token não encontrado');
-            return;
-        }
-        
-        const response = await fetch('http://localhost:3000/api/account/deletion-status', {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        
-        if (response.ok) {
-            const data = await response.json();
-            
-            if (data.hasPendingDeletion) {
-                const banner = document.getElementById('deletionWarningBanner');
-                const daysSpan = document.getElementById('profileDaysRemaining');
-                
-                if (banner && daysSpan) {
-                    daysSpan.textContent = data.deletionRecord.daysRemaining;
-                    banner.style.display = 'block';
-                    
-                    // Salvar no localStorage para cache
-                    localStorage.setItem('gymp2_deletion_status', JSON.stringify(data));
-                }
-            }
-        }
-        */
-        
-    } catch (error) {
-        console.error('❌ Erro ao verificar status:', error);
-        // Não mostrar erro ao usuário, apenas no console
-    }
-}
-
-function closeWarningBanner() {
-    const banner = document.getElementById('deletionWarningBanner');
-    if (banner) {
-        banner.style.display = 'none';
-        console.log('🔒 Banner fechado pelo usuário');
-        
-        // Salvar preferência do usuário (não mostrar novamente nesta sessão)
-        sessionStorage.setItem('hideDeletionBanner', 'true');
-    }
-}
-
-// Verificar se usuário já fechou o banner nesta sessão
-if (sessionStorage.getItem('hideDeletionBanner') === 'true') {
-    const banner = document.getElementById('deletionWarningBanner');
-    if (banner) banner.style.display = 'none';
-}
-
-// Atualizar banner quando houver mudanças no localStorage (de outras páginas)
-window.addEventListener('storage', function(event) {
-    if (event.key === 'gymp2_deletion_status') {
-        console.log('🔄 Status atualizado, verificando novamente...');
-        checkAccountDeletionStatus();
-    }
-});
-
-// Também ouvir eventos personalizados (se usar entre páginas)
-window.addEventListener('accountStatusChanged', function() {
-    console.log('🔄 Evento de mudança recebido, verificando status...');
-    checkAccountDeletionStatus();
-});
-</script>
     <nav class="slide-menu" id="slideMenu">
         <div class="menu-header">
             <button class="menu-close-btn" id="menuCloseBtn" aria-label="Fechar menu">
@@ -181,18 +47,21 @@ window.addEventListener('accountStatusChanged', function() {
                 </svg>
             </button>
         </div>
-        <button class="menu-search-btn" id="menuSearchBtn">Academias</button>
-          <ul class="navigation-list">
-            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="login-gym.html" class="nav-link">Login</a></li>
-            <li class="nav-item"><a href="Filtro_personal.html" class="nav-link">Personais</a></li>
-            <li class="nav-item"><a href="#news" class="nav-link">Sorteios</a></li>
-            <li class="nav-item"><a href="config.html" class="nav-link">Configurações</a></li>
-          
-            <li class="nav-item"><a href="Sobre_nós.html" class="nav-link">Sobre nós</a></li>
+       <a href="academias-publicas.html"><button class="menu-search-btn">
+            <i class="fas fa-search"></i> Academias
+        </button>
+        </a> 
+        <ul class="navigation-list">
+            <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-item"><a href="#espaço-cliente" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            <li class="nav-item"><a href="Filtro_personal.html" class="nav-link"><i class="fas fa-percent"></i> Promoções</a></li>
+            <li class="nav-item"><a href="#news" class="nav-link"><i class="fas fa-gift"></i> Sorteios</a></li>
+            <li class="nav-item"><a href="config.html" class="nav-link"><i class="fas fa-cog"></i> Configurações</a></li>
+            <li class="nav-item"><a href="Sobre_nós.html" class="nav-link"><i class="fas fa-info-circle"></i> Sobre nós</a></li>
         </ul>
     </nav>
     <div class="menu-overlay" id="menuOverlay"></div>
+    
     <section class="hero">
         <div class="container">
             <div class="hero-content">
@@ -201,7 +70,7 @@ window.addEventListener('accountStatusChanged', function() {
                         <span class="rotating-text-wrapper">
                             <div class="rotating-text creative">Academias</div>
                             <div class="rotating-text innovative">Artes Marciais</div>
-                        
+                            <div class="rotating-text professional">Blogs e dicas</div>
                             <div class="rotating-text dynamic">Sorteios</div>
                         </span>
                     </h1>
@@ -213,12 +82,10 @@ window.addEventListener('accountStatusChanged', function() {
                     </p>
                     <a href="Sobre_nós.html"><button class="start-button">Sobre nós</button></a>
                 </div>
-                
-              <div class="workout-card">
+                <div class="workout-card">
                     <div class="workout-header">
                         <div class="workout-title"></div>
                     </div>
-                  
                     <div class="workout-image">
                         <div class="circle-progress">
                             <div class="workout-man"></div>
@@ -230,13 +97,11 @@ window.addEventListener('accountStatusChanged', function() {
                                 <div class="slide1"></div>
                                 <div class="slide1"></div>
                                 <div class="slide1"></div>
-                               
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
     
@@ -244,14 +109,12 @@ window.addEventListener('accountStatusChanged', function() {
         <div class="section-header">
             <h1 class="section-title">Academias Destaque</h1>
         </div>
-
         <div class="cards">
             <div class="academy-card1" data-type="musculacao" data-location="centro" data-price="60">
                 <div class="price-badge">R$ 85/mês</div>
-                <div class="card-image" style="background-image: url('')">
-                </div>
+                <div class="card-image" style="background-image: url('data:image/jpeg;base64,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')"></div>
                 <div class="card-content">
-                    <h3 class="academy-name"></h3>
+                    <h3 class="academy-name">Smart Strong</h3>
                     <span class="academy-type">Tipo: Musculação</span>
                     <div class="academy-location">R. Ângelo, n°137, Pedro II - PI, 64255-000</div>
                     <div class="schedule-section">
@@ -263,15 +126,14 @@ window.addEventListener('accountStatusChanged', function() {
                     <a href="Smart-Strong.html" class="view-details-btn">Ver Detalhes</a>
                 </div>
             </div>
-
+            
             <div class="academy-card1" data-type="musculacao" data-location="centro" data-price="60">
                 <div class="price-badge">R$ 80/mês</div>
-                <div class="card-image" style="background-image: url('')">
-                </div>
+                <div class="card-image" style="background-image: url('')"></div>
                 <div class="card-content">
-                    <h3 class="academy-name"></h3>
+                    <h3 class="academy-name">Rede-Fit P2</h3>
                     <span class="academy-type">Tipo: Musculação</span>
-                    <div class="academy-location">R. . Cordeiro, 739, Pedro II - PI, 64255-000</div>
+                    <div class="academy-location">R. Cordeiro, 739, Pedro II - PI, 64255-000</div>
                     <div class="schedule-section">
                         <div class="schedule">
                             <div class="schedule-line"><strong>Seg a Sex:</strong> 5h - 23h</div>
@@ -281,15 +143,14 @@ window.addEventListener('accountStatusChanged', function() {
                     <a href="Redefit.html" class="view-details-btn">Ver Detalhes</a>
                 </div>
             </div>
-
+            
             <div class="academy-card1" data-type="musculacao" data-location="centro" data-price="60">
                 <div class="price-badge">R$ 60/mês</div>
-                <div class="card-image" style="background-image: url('')">
-                </div>
+                <div class="card-image" style="background-image: url('')"></div>
                 <div class="card-content">
-                    <h3 class="academy-name">Academia</h3>
+                    <h3 class="academy-name">Olympic Fit</h3>
                     <span class="academy-type">Tipo: Musculação</span>
-                    <div class="academy-location"> José Lourenço Mourão, 865A, Pedro II - PI, 64255-000</div>
+                    <div class="academy-location">José Lourenço Mourão, 865A, Pedro II - PI, 64255-000</div>
                     <div class="schedule-section">
                         <div class="schedule">
                             <div class="schedule-line"><strong>Seg a Sex:</strong> 5h - 23h</div>
@@ -300,56 +161,53 @@ window.addEventListener('accountStatusChanged', function() {
                 </div>
             </div>
         </div>
-
+        
         <div class="cards2">
-            <div class="academy-card2" data-type="musculacao" data-location="centro" data-price="60">
-                <div class="price-badge2">R$ 60/mês</div>
-                <div class="card-image2" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=250&fit=crop&q=80')">
-                </div>
+            <div class="academy-card2" data-type="artes-marciais" data-location="centro" data-price="60">
+                <div class="price-badge2">R$ 70/mês</div>
+                <div class="card-image2" style="background-image: url('')"></div>
                 <div class="card-content2">
-                    <h3 class="academy-name2">Academia Força Total</h3>
+                    <h3 class="academy-name2">Força Total</h3>
                     <span class="academy-type2">Tipo: Artes Marciais</span>
-                    <div class="academy-location2">Rua Principal, 123 - Centro</div>
+                    <div class="academy-location2">Rua Principal, 123 - Centro, Pedro II - PI</div>
                     <div class="schedule-section2">
                         <div class="schedule2">
-                            <div class="schedule-line2"><strong>Seg a Sex:</strong> 5h - 23h</div>
-                            <div class="schedule-line2"><strong>Sáb/Feriados:</strong> 8h - 17h</div>
+                            <div class="schedule-line2"><strong>Seg a Sex:</strong> 7h - 22h</div>
+                            <div class="schedule-line2"><strong>Sáb/Feriados:</strong> 9h - 16h</div>
+                        </div>
+                    </div>
+                    <a href="#" class="view-details-btn2">Ver Detalhes</a>
+                </div>
+            </div>
+            
+            <div class="academy-card2" data-type="artes-marciais" data-location="centro" data-price="60">
+                <div class="price-badge2">R$ 75/mês</div>
+                <div class="card-image2" style="background-image: url('')"></div>
+                <div class="card-content2">
+                    <h3 class="academy-name2">Combate Fit</h3>
+                    <span class="academy-type2">Tipo: Artes Marciais</span>
+                    <div class="academy-location2">Av. Central, 456 - Centro, Pedro II - PI</div>
+                    <div class="schedule-section2">
+                        <div class="schedule2">
+                            <div class="schedule-line2"><strong>Seg a Sex:</strong> 6h - 21h</div>
+                            <div class="schedule-line2"><strong>Sáb/Feriados:</strong> 8h - 15h</div>
                         </div>
                     </div>
                     <a href="#" class="view-details-btn2">Ver Detalhes</a>
                 </div>
             </div>
 
-            <div class="academy-card2" data-type="musculacao" data-location="centro" data-price="60">
-                <div class="price-badge2">R$ 60/mês</div>
-                <div class="card-image2" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=250&fit=crop&q=80')">
-                </div>
+            <div class="academy-card2" data-type="artes-marciais" data-location="centro" data-price="60">
+                <div class="price-badge2">R$ 65/mês</div>
+                <div class="card-image2" style="background-image: url('')"></div>
                 <div class="card-content2">
-                    <h3 class="academy-name2">Academia Força Total</h3>
+                    <h3 class="academy-name2">Elite Combat</h3>
                     <span class="academy-type2">Tipo: Artes Marciais</span>
-                    <div class="academy-location2">Rua Principal, 123 - Centro</div>
+                    <div class="academy-location2">Rua das Flores, 789 - Centro, Pedro II - PI</div>
                     <div class="schedule-section2">
                         <div class="schedule2">
-                            <div class="schedule-line2"><strong>Seg a Sex:</strong> 5h - 23h</div>
-                            <div class="schedule-line2"><strong>Sáb/Feriados:</strong> 8h - 17h</div>
-                        </div>
-                    </div>
-                    <a href="#" class="view-details-btn2">Ver Detalhes</a>
-                </div>
-            </div>
-
-            <div class="academy-card2" data-type="musculacao" data-location="centro" data-price="60">
-                <div class="price-badge2">R$ 60/mês</div>
-                <div class="card-image2" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=250&fit=crop&q=80')">
-                </div>
-                <div class="card-content2">
-                    <h3 class="academy-name2">Academia Força Total</h3>
-                    <span class="academy-type2">Tipo: Artes Marciais</span>
-                    <div class="academy-location2">Rua Principal, 123 - Centro</div>
-                    <div class="schedule-section2">
-                        <div class="schedule2">
-                            <div class="schedule-line2"><strong>Seg a Sex:</strong> 5h - 23h</div>
-                            <div class="schedule-line2"><strong>Sáb/Feriados:</strong> 8h - 17h</div>
+                            <div class="schedule-line2"><strong>Seg a Sex:</strong> 8h - 20h</div>
+                            <div class="schedule-line2"><strong>Sáb/Feriados:</strong> 10h - 14h</div>
                         </div>
                     </div>
                     <a href="#" class="view-details-btn2">Ver Detalhes</a>
@@ -357,9 +215,9 @@ window.addEventListener('accountStatusChanged', function() {
             </div>
         </div>
     </section>
-     <section class="quatro">
+  
+    <section class="quatro">
         <div class="accent-bar"></div>
-        
         <div class="personal-wrapper">
             <!-- LADO ESQUERDO -->
             <div class="personal-text">
@@ -397,7 +255,7 @@ window.addEventListener('accountStatusChanged', function() {
 
                 <div class="cta-buttons">
                     <a href="Filtro_personal.html" class="btn btn-download">
-                      <i class="fas fa-search"></i>
+                        <i class="fas fa-search"></i>
                         Encontrar Personal
                     </a>
                     
@@ -460,14 +318,14 @@ window.addEventListener('accountStatusChanged', function() {
             </div>
         </div>
     </section>
-
    
     <footer class="academia-footer">
         <div class="academia-background">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 width="100%" height="100%" viewBox="0 0 1600 900">
                 <defs>
-                    <path id="wave" fill="rgba(0, 200, 100, 0.5)" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
+                    <!-- COR ALTERADA AQUI: #00ff40 com 30% de opacidade (4D em hex) -->
+                    <path id="wave" fill="#00ff404D" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
                     s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z" />
                 </defs>
                 <g>
@@ -527,795 +385,790 @@ window.addEventListener('accountStatusChanged', function() {
             </div>
         </div>
     </footer>
-
-  <script src="menu.js"></script>
-  <!-- 1. Sistema de Notificações Globais -->
-<script src="global-notifications.js"></script>
-<!-- 2. Gerenciador de Usuários -->
-<script src="user-manager.js"></script>
-<!-- 3. Header com Informações do Usuário -->
-<script src="user-header.js"></script>
-
-<script>
-    // ========== PREVENIR LOOP DE REDIRECIONAMENTO ==========
-(function() {
-    // Verificar se acabou de fazer login
-    const justLoggedIn = sessionStorage.getItem('justLoggedIn');
-    if (justLoggedIn === 'true') {
-        console.log('✅ Login recente detectado - limpando flag');
-        sessionStorage.removeItem('justLoggedIn');
-        return; // Não executar verificações adicionais
-    }
     
-    // Verificar se já está redirecionando
-    const redirecting = localStorage.getItem('redirecting');
-    if (redirecting === 'true') {
-        console.log('⚠️ Redirecionamento em andamento, ignorando...');
-        localStorage.removeItem('redirecting');
-        return;
-    }
-})();
-// ========== DEBUG EM TEMPO REAL ==========
-console.log('🔍 VERIFICANDO LOGIN AO CARREGAR PÁGINA...');
-
-// ... seu código de debug permanece igual ...
-
-// ========== DETECÇÃO AUTOMÁTICA DE LOGIN ==========
-(function() {
-    console.log('🔍 Verificando status de login...');
+    <script src="menu.js"></script>
+    <!-- 1. Sistema de Notificações Globais -->
+    <script src="global-notifications.js"></script>
+    <!-- 2. Gerenciador de Usuários -->
+    <script src="user-manager.js"></script>
+    <!-- 3. Header com Informações do Usuário -->
+    <script src="user-header.js"></script>
     
-    // Verificar se há usuário logado
-    const userData = localStorage.getItem('gymp2_current_user') || 
-                     localStorage.getItem('currentUser');
+    <script>   
+        // ========== SISTEMA DO HEADER ==========
     
-    if (userData) {
-        try {
-            const user = JSON.parse(userData);
-            console.log('✅ Usuário logado detectado:', user.name);
+        // Verificar se usuário está logado
+        function checkUserLogin() {
+            const user = getCurrentUser();
+            const userHeaderContainer = document.getElementById('userHeaderContainer');
+            const loginButton = document.getElementById('loginButton');
             
-            // Trocar o botão "Login" pelo nome do usuário
-            const loginButtons = document.querySelectorAll('.gym-access-btn');
+            if (user) {
+                // Usuário está logado - mostrar botão do usuário
+                if (userHeaderContainer) userHeaderContainer.style.display = 'flex';
+                if (loginButton) loginButton.style.display = 'none';
+                
+                // Atualizar nome e avatar no header
+                updateHeaderUserInfo(user);
+            } else {
+                // Usuário não está logado - mostrar botão de login
+                if (userHeaderContainer) userHeaderContainer.style.display = 'none';
+                if (loginButton) loginButton.style.display = 'block';
+            }
+        }
+        
+        // Atualizar informações do usuário no header
+        function updateHeaderUserInfo(user) {
+            // Nome no botão do header
+            const userNameHeader = document.getElementById('userNameHeader');
+            const dropdownUserName = document.getElementById('dropdownUserName');
+            const dropdownUserEmail = document.getElementById('dropdownUserEmail');
+            const userAvatar = document.getElementById('userAvatar');
+            
+            if (userNameHeader) userNameHeader.textContent = user.name || 'Usuário';
+            if (dropdownUserName) dropdownUserName.textContent = user.name || 'Usuário';
+            if (dropdownUserEmail) dropdownUserEmail.textContent = user.email || 'email@exemplo.com';
+            
+            // Atualizar avatar com iniciais
+            if (userAvatar && user.name) {
+                const initials = getInitials(user.name);
+                userAvatar.textContent = initials;
+            }
+        }
+        
+        // Função para obter iniciais do nome
+        function getInitials(name) {
+            if (!name) return 'U';
+            return name
+                .split(' ')
+                .map(n => n[0])
+                .slice(0, 2)
+                .join('')
+                .toUpperCase();
+        }
+        
+        // Sistema de dropdown do usuário
+        document.addEventListener('DOMContentLoaded', function() {
+            const userHeaderContainer = document.getElementById('userHeaderContainer');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (userHeaderContainer && userDropdown) {
+                userHeaderContainer.addEventListener('click', function() {
+                    userDropdown.style.opacity = userDropdown.style.opacity === '1' ? '0' : '1';
+                    userDropdown.style.visibility = userDropdown.style.visibility === 'visible' ? 'hidden' : 'visible';
+                    userDropdown.style.transform = userDropdown.style.transform === 'translateY(0px)' ? 'translateY(-10px)' : 'translateY(0px)';
+                });
+                
+                // Fechar dropdown ao clicar fora
+                document.addEventListener('click', function(event) {
+                    if (!userHeaderContainer.contains(event.target)) {
+                        userDropdown.style.opacity = '0';
+                        userDropdown.style.visibility = 'hidden';
+                        userDropdown.style.transform = 'translateY(-10px)';
+                    }
+                });
+            }
+        });
+        
+        // Função de logout
+        function logout() {
+            if (confirm('Tem certeza que deseja sair da sua conta?')) {
+                // Limpar dados do usuário
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('gymp2_current_user');
+                sessionStorage.removeItem('gymp2_user');
+                
+                // Redirecionar para página inicial
+                window.location.href = 'index.html';
+            }
+        }
+
+        // ========== FUNÇÕES DO HEADER (PESQUISA E MENU) ==========
+        
+        // Sistema de pesquisa
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchToggle = document.getElementById('searchToggle');
+            const searchField = document.getElementById('searchField');
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            if (searchToggle && searchField && searchInput) {
+                searchToggle.addEventListener('click', function() {
+                    searchField.classList.toggle('expanded');
+                    if (searchField.classList.contains('expanded')) {
+                        searchInput.focus();
+                    } else {
+                        searchInput.value = '';
+                        searchResults.classList.remove('active');
+                    }
+                });
+                
+                searchInput.addEventListener('input', function() {
+                    if (this.value.trim() !== '') {
+                        searchResults.classList.add('active');
+                        // Simular resultados
+                        searchResults.innerHTML = `
+                            <div class="search-result-item">
+                                <div class="result-category">ACADEMIA</div>
+                                <div class="result-title">Smart Strong</div>
+                                <div class="result-description">Academia de musculação e crossfit</div>
+                            </div>
+                            <div class="search-result-item">
+                                <div class="result-category">ACADEMIA</div>
+                                <div class="result-title">Rede-Fit P2</div>
+                                <div class="result-description">Rede de academias fitness</div>
+                            </div>
+                            <div class="search-result-item">
+                                <div class="result-category">ACADEMIA</div>
+                                <div class="result-title">Olympic Fit</div>
+                                <div class="result-description">Academia de alta performance</div>
+                            </div>
+                        `;
+                    } else {
+                        searchResults.classList.remove('active');
+                    }
+                });
+                
+                // Fechar pesquisa ao clicar fora
+                document.addEventListener('click', function(event) {
+                    if (!searchField.contains(event.target) && !searchToggle.contains(event.target)) {
+                        searchField.classList.remove('expanded');
+                        searchResults.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Função para obter iniciais do nome
+            function getInitials(name) {
+                return name
+                    .split(' ')
+                    .map(n => n[0])
+                    .slice(0, 2)
+                    .join('')
+                    .toUpperCase();
+            }
+            
+            // Configurar dropdown do usuário
+            function setupUserDropdown() {
+                const userContainer = document.getElementById('userHeaderContainer');
+                const dropdownMenu = document.getElementById('userDropdownMenu');
+                const logoutBtn = document.getElementById('logoutBtnHeader'); // ID ALTERADO AQUI
+                
+                if (!userContainer || !dropdownMenu || !logoutBtn) {
+                    console.log('⚠️ Elementos do dropdown não encontrados');
+                    return;
+                }
+                
+                // Toggle do dropdown
+                userContainer.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isActive = dropdownMenu.style.opacity === '1';
+                    
+                    if (isActive) {
+                        dropdownMenu.style.opacity = '0';
+                        dropdownMenu.style.visibility = 'hidden';
+                        dropdownMenu.style.transform = 'translateY(-10px)';
+                    } else {
+                        dropdownMenu.style.opacity = '1';
+                        dropdownMenu.style.visibility = 'visible';
+                        dropdownMenu.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                // Fechar dropdown ao clicar fora
+                document.addEventListener('click', (e) => {
+                    if (!userContainer.contains(e.target)) {
+                        dropdownMenu.style.opacity = '0';
+                        dropdownMenu.style.visibility = 'hidden';
+                        dropdownMenu.style.transform = 'translateY(-10px)';
+                    }
+                });
+                
+                // Prevenir fechamento ao clicar no dropdown
+                dropdownMenu.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+                
+                // Hover effect no container
+                userContainer.addEventListener('mouseenter', () => {
+                    userContainer.style.background = 'rgba(0, 255, 136, 0.2)';
+                    userContainer.style.borderColor = 'rgba(0, 255, 136, 0.5)';
+                    userContainer.style.transform = 'translateY(-2px)';
+                    userContainer.style.boxShadow = '0 4px 15px rgba(0, 255, 136, 0.3)';
+                });
+                
+                userContainer.addEventListener('mouseleave', () => {
+                    userContainer.style.background = 'rgba(0, 255, 136, 0.1)';
+                    userContainer.style.borderColor = 'rgba(0, 255, 136, 0.3)';
+                    userContainer.style.transform = 'translateY(0)';
+                    userContainer.style.boxShadow = 'none';
+                });
+                
+                // Hover nos itens do menu
+                const menuItems = dropdownMenu.querySelectorAll('a, #logoutBtnHeader');
+                menuItems.forEach(item => {
+                    item.addEventListener('mouseenter', () => {
+                        item.style.background = 'rgba(0, 255, 136, 0.1)';
+                    });
+                    item.addEventListener('mouseleave', () => {
+                        item.style.background = 'transparent';
+                    });
+                });
+                
+                // EVENTO DE LOGOUT CORRIGIDO
+                logoutBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    
+                    if (confirm('Deseja realmente sair da sua conta?')) {
+                        console.log('🚪 Fazendo logout do header...');
+                        
+                        // Limpar TODOS os dados de sessão
+                        localStorage.removeItem('gymp2_current_user');
+                        localStorage.removeItem('currentUser');
+                        sessionStorage.removeItem('gymp2_token');
+                        sessionStorage.removeItem('gymp2_user');
+                        
+                        // Mostrar feedback
+                        if (window.notifications) {
+                            window.notifications.success('Logout realizado com sucesso!');
+                        } else {
+                            alert('Logout realizado!');
+                        }
+                        
+                        // Remover o dropdown imediatamente
+                        const userContainer = document.getElementById('userHeaderContainer');
+                        if (userContainer) {
+                            userContainer.remove();
+                        }
+                        
+                        // Recriar o botão de login
+                        recreateLoginButton();
+                        
+                        // Recarregar a página após 1 segundo para sincronizar tudo
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    }
+                });
+                
+                console.log('✅ Dropdown do usuário configurado');
+            }
+            
+            // FUNÇÃO PARA RECRIAR BOTÃO DE LOGIN
+            function recreateLoginButton() {
+                const rightControls = document.querySelector('.right-controls');
+                if (!rightControls) return;
+                
+                // Criar botão de login
+                const loginBtn = document.createElement('div');
+                loginBtn.className = 'gym-access-btn';
+                loginBtn.innerHTML = `
+                    <a href="login-gym.html" style="color: #00ff88; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </a>
+                `;
+                
+                // Inserir no lugar correto
+                const menuTrigger = document.getElementById('menuTrigger');
+                if (menuTrigger) {
+                    menuTrigger.parentNode.insertBefore(loginBtn, menuTrigger);
+                } else {
+                    rightControls.appendChild(loginBtn);
+                }
+                
+                console.log('✅ Botão de login recriado');
+            }
+        })();
+        // NÃO ADICIONE A FUNÇÃO logout() AQUI - ELA FOI REMOVIDA
+    </script>
+    
+    <script>
+        // ========== DEBUG E VERIFICAÇÃO ==========
+        console.log('🚀 Script de login carregado!');
+        
+        // Verificar se há usuário logado imediatamente
+        const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
+        console.log('📦 Dados do usuário no localStorage:', userData);
+        
+        if (userData) {
+            try {
+                const user = JSON.parse(userData);
+                console.log('👤 Usuário parseado:', user);
+            } catch (error) {
+                console.error('❌ Erro ao fazer parse:', error);
+            }
+        }
+        
+        // ========== SISTEMA PRINCIPAL ATUALIZADO ==========
+        function initLoginSystem() {
+            console.log('🔧 Iniciando sistema de login...');
+            
+            const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
+            
+            if (userData) {
+                try {
+                    const user = JSON.parse(userData);
+                    console.log(' Usuário logado detectado:', user.name);
+                    updateUIForLoggedUser(user);
+                } catch (error) {
+                    console.error(' Erro ao processar usuário:', error);
+                }
+            } else {
+                console.log('ℹ️ Nenhum usuário logado');
+                resetUIForLoggedOut();
+            }
+        }
+        
+        // ========== ATUALIZAR INTERFACE PARA USUÁRIO LOGADO ==========
+        function updateUIForLoggedUser(user) {
+            console.log('🎨 Atualizando UI para usuário logado:', user.name);
+            
+            // 1. Atualizar header principal
+            updateMainHeader(user);
+            
+            // 2. Atualizar menu hamburguer
+            updateHamburgerMenu(user);
+            
+            console.log('✅ UI atualizada com sucesso!');
+        }
+        
+        // ========== ATUALIZAR HEADER PRINCIPAL ==========
+        function updateMainHeader(user) {
+            const rightControls = document.querySelector('.right-controls');
+            if (!rightControls) {
+                console.error('❌ .right-controls não encontrado');
+                return;
+            }
+        
+            // Remover botão Login existente
+            const loginButtons = rightControls.querySelectorAll('.gym-access-btn');
             loginButtons.forEach(btn => {
-                if (btn.textContent.includes('Login')) {
-                    // Substituir pelo dropdown do usuário
-                    btn.outerHTML = `
-                        <div class="user-header-container" id="userHeaderContainer" style="
+                if (btn.textContent.includes('Login') || btn.querySelector('a')?.textContent.includes('Login')) {
+                    console.log('🗑 Removendo botão Login do header');
+                    btn.remove();
+                }
+            });
+        
+            // Verificar se já existe o componente de usuário
+            if (document.getElementById('userHeaderContainer')) {
+                console.log('ℹ️ Header de usuário já existe');
+                return;
+            }
+        
+            // Criar componente do usuário
+            const initials = user.name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+            const firstName = user.name.split(' ')[0];
+        
+            const userHTML = `
+                <div class="user-header-container" id="userHeaderContainer" style="
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    background: rgba(0, 255, 136, 0.1);
+                    border: 2px solid rgba(0, 255, 136, 0.3);
+                    border-radius: 30px;
+                    padding: 6px 16px 6px 6px;
+                    transition: all 0.3s ease;
+                    cursor: pointer;
+                    position: relative;
+                ">
+                    <div class="user-avatar" style="
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 700;
+                        font-size: 16px;
+                        color: #000;
+                        border: 2px solid #fff;
+                    ">${initials}</div>
+                    
+                    <span class="user-name-text" style="
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #fff;
+                    ">${firstName}</span>
+                    
+                    <div class="user-dropdown-menu" id="userDropdownMenu" style="
+                        position: absolute;
+                        top: calc(100% + 10px);
+                        right: 0;
+                        background: #1a1a1a;
+                        border: 2px solid rgba(0, 255, 136, 0.3);
+                        border-radius: 16px;
+                        padding: 12px;
+                        min-width: 220px;
+                        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+                        opacity: 0;
+                        visibility: hidden;
+                        transform: translateY(-10px);
+                        transition: all 0.3s ease;
+                        z-index: 3000;
+                    ">
+                        <div style="padding: 12px; border-bottom: 1px solid rgba(0, 255, 136, 0.2); margin-bottom: 8px;">
+                            <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px;">${user.name}</div>
+                            <div style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">${user.email || 'usuario@gymp2.com'}</div>
+                        </div>
+                        
+                        <a href="#perfil" style="
                             display: flex;
                             align-items: center;
                             gap: 12px;
-                            background: rgba(0, 255, 136, 0.1);
-                            border: 2px solid rgba(0, 255, 136, 0.3);
-                            border-radius: 30px;
-                            padding: 6px 16px 6px 6px;
+                            padding: 12px;
+                            border-radius: 10px;
                             cursor: pointer;
-                            position: relative;
-                            transition: all 0.3s ease;
+                            transition: all 0.2s ease;
+                            color: #fff;
+                            text-decoration: none;
+                            margin-bottom: 4px;
                         ">
-                            <div class="user-avatar" style="
-                                width: 40px;
-                                height: 40px;
-                                border-radius: 50%;
-                                background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                font-weight: 700;
-                                font-size: 16px;
-                                color: #000;
-                                border: 2px solid #fff;
-                            ">${getInitials(user.name)}</div>
-                            
-                            <span class="user-name-text" style="
-                                font-size: 14px;
-                                font-weight: 600;
-                                color: #fff;
-                            ">${user.name.split(' ')[0]}</span>
-                            
-                            <div class="user-dropdown-menu" id="userDropdownMenu" style="
-                                position: absolute;
-                                top: calc(100% + 10px);
-                                right: 0;
-                                background: #1a1a1a;
-                                border: 2px solid rgba(0, 255, 136, 0.3);
-                                border-radius: 16px;
-                                padding: 12px;
-                                min-width: 220px;
-                                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-                                opacity: 0;
-                                visibility: hidden;
-                                transform: translateY(-10px);
-                                transition: all 0.3s ease;
-                                z-index: 3000;
-                            ">
-                                <div style="padding: 12px; border-bottom: 1px solid rgba(0, 255, 136, 0.2); margin-bottom: 8px;">
-                                    <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px;">${user.name}</div>
-                                    <div style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">${user.email}</div>
-                                </div>
-                                
-                                <a href="perfil.html" style="
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 12px;
-                                    padding: 12px;
-                                    border-radius: 10px;
-                                    cursor: pointer;
-                                    transition: all 0.2s ease;
-                                    color: #fff;
-                                    text-decoration: none;
-                                    margin-bottom: 4px;
-                                ">
-                                    <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                                    </svg>
-                                    Meu Perfil
-                                </a>
-                                
-                                <div id="logoutBtnHeader" style="
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 12px;
-                                    padding: 12px;
-                                    border-radius: 10px;
-                                    cursor: pointer;
-                                    transition: all 0.2s ease;
-                                    color: #ff4444;
-                                    border-top: 1px solid rgba(255, 68, 68, 0.2);
-                                    margin-top: 8px;
-                                ">
-                                    <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
-                                    </svg>
-                                    Sair
-                                </div>
-                            </div>
+                            <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                            </svg>
+                            Meu Perfil
+                        </a>
+                        
+                        <div id="logoutBtn" style="
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            padding: 12px;
+                            border-radius: 10px;
+                            cursor: pointer;
+                            transition: all 0.2s ease;
+                            color: #ff4444;
+                            border-top: 1px solid rgba(255, 68, 68, 0.2);
+                            margin-top: 8px;
+                        ">
+                            <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                            </svg>
+                            Sair
                         </div>
-                    `;
-                    
-                    // Configurar eventos após inserir o HTML
-                    setTimeout(setupUserDropdown, 100);
-                }
-            });
-            
-        } catch (error) {
-            console.error('❌ Erro ao processar dados do usuário:', error);
-        }
-    } else {
-        console.log('ℹ️ Nenhum usuário logado');
-    }
-    
-    // Função para obter iniciais do nome
-    function getInitials(name) {
-        return name
-            .split(' ')
-            .map(n => n[0])
-            .slice(0, 2)
-            .join('')
-            .toUpperCase();
-    }
-    
-    // Configurar dropdown do usuário
-    function setupUserDropdown() {
-        const userContainer = document.getElementById('userHeaderContainer');
-        const dropdownMenu = document.getElementById('userDropdownMenu');
-        const logoutBtn = document.getElementById('logoutBtnHeader'); // ID ALTERADO AQUI
+                    </div>
+                </div>
+            `;
         
-        if (!userContainer || !dropdownMenu || !logoutBtn) {
-            console.log('⚠️ Elementos do dropdown não encontrados');
-            return;
-        }
-        
-        // Toggle do dropdown
-        userContainer.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isActive = dropdownMenu.style.opacity === '1';
-            
-            if (isActive) {
-                dropdownMenu.style.opacity = '0';
-                dropdownMenu.style.visibility = 'hidden';
-                dropdownMenu.style.transform = 'translateY(-10px)';
+            // Inserir antes do menu hamburguer
+            const menuTrigger = document.getElementById('menuTrigger');
+            if (menuTrigger) {
+                menuTrigger.insertAdjacentHTML('beforebegin', userHTML);
+                console.log('✅ Header de usuário inserido no header principal');
             } else {
-                dropdownMenu.style.opacity = '1';
-                dropdownMenu.style.visibility = 'visible';
-                dropdownMenu.style.transform = 'translateY(0)';
+                rightControls.insertAdjacentHTML('beforeend', userHTML);
+                console.log('✅ Header de usuário inserido no final do header');
             }
-        });
         
-        // Fechar dropdown ao clicar fora
-        document.addEventListener('click', (e) => {
-            if (!userContainer.contains(e.target)) {
+            // Configurar eventos do dropdown
+            setupUserDropdownEvents();
+        }
+        
+        // ========== ATUALIZAR MENU HAMBURGUER ==========
+        function updateHamburgerMenu(user) {
+            console.log('🍔 Atualizando menu hamburguer...');
+            
+            const navigationList = document.querySelector('.navigation-list');
+            if (!navigationList) {
+                console.error('❌ .navigation-list não encontrado');
+                return;
+            }
+        
+            // Encontrar item de Login
+            const navItems = navigationList.querySelectorAll('.nav-item');
+            let loginItem = null;
+            
+            navItems.forEach(item => {
+                const link = item.querySelector('.nav-link');
+                if (link && (link.textContent.trim() === 'Login' || link.getAttribute('href') === '#espaço-cliente')) {
+                    loginItem = item;
+                    console.log('🔍 Item de login encontrado no menu');
+                }
+            });
+        
+            if (loginItem) {
+                const firstName = user.name.split(' ')[0];
+                
+                // Substituir Login por Perfil
+                loginItem.innerHTML = `
+                    <a href="#perfil" class="nav-link" style="color: #00ff88; font-weight: 700; background: rgba(0, 255, 136, 0.1); border-radius: 8px; margin: 5px 0; padding: 12px 15px !important;">
+                        <i class="fas fa-user" style="margin-right: 10px;"></i>
+                        Meu Perfil (${firstName})
+                    </a>
+                `;
+                console.log('✅ Login substituído por Perfil no menu');
+        
+                // Remover logout existente
+                const existingLogout = document.getElementById('menuLogoutBtn');
+                if (existingLogout) {
+                    existingLogout.closest('.nav-item').remove();
+                    console.log('🗑 Logout anterior removido');
+                }
+        
+                // Adicionar item Sair
+                const logoutItem = document.createElement('li');
+                logoutItem.className = 'nav-item';
+                logoutItem.innerHTML = `
+                    <a href="#logout" class="nav-link" style="color: #ff4444; background: rgba(255, 68, 68, 0.1); border-radius: 8px; margin: 5px 0; padding: 12px 15px !important;" id="menuLogoutBtn">
+                        <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>
+                        Sair
+                    </a>
+                `;
+                
+                navigationList.appendChild(logoutItem);
+                console.log('✅ Item Sair adicionado ao menu');
+        
+                // Configurar evento de logout
+                const menuLogoutBtn = document.getElementById('menuLogoutBtn');
+                if (menuLogoutBtn) {
+                    menuLogoutBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (confirm('Deseja realmente sair da sua conta?')) {
+                            console.log('🚪 Fazendo logout...');
+                            localStorage.removeItem('gymp2_current_user');
+                            localStorage.removeItem('currentUser');
+                            alert('Logout realizado com sucesso!');
+                            window.location.reload();
+                        }
+                    });
+                }
+            } else {
+                console.log('⚠️ Item de login não encontrado no menu hamburguer');
+            }
+        }
+        
+        // ========== CONFIGURAR EVENTOS DO DROPDOWN ==========
+        function setupUserDropdownEvents() {
+            const userContainer = document.getElementById('userHeaderContainer');
+            const dropdownMenu = document.getElementById('userDropdownMenu');
+            const logoutBtn = document.getElementById('logoutBtn');
+        
+            if (!userContainer || !dropdownMenu || !logoutBtn) {
+                console.error('❌ Elementos do dropdown não encontrados');
+                return;
+            }
+        
+            // Toggle dropdown
+            userContainer.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isVisible = dropdownMenu.style.opacity === '1';
+                
+                if (isVisible) {
+                    dropdownMenu.style.opacity = '0';
+                    dropdownMenu.style.visibility = 'hidden';
+                    dropdownMenu.style.transform = 'translateY(-10px)';
+                } else {
+                    dropdownMenu.style.opacity = '1';
+                    dropdownMenu.style.visibility = 'visible';
+                    dropdownMenu.style.transform = 'translateY(0)';
+                }
+            });
+        
+            // Fechar ao clicar fora
+            document.addEventListener('click', () => {
                 dropdownMenu.style.opacity = '0';
                 dropdownMenu.style.visibility = 'hidden';
                 dropdownMenu.style.transform = 'translateY(-10px)';
-            }
-        });
-        
-        // Prevenir fechamento ao clicar no dropdown
-        dropdownMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-        
-        // Hover effect no container
-        userContainer.addEventListener('mouseenter', () => {
-            userContainer.style.background = 'rgba(0, 255, 136, 0.2)';
-            userContainer.style.borderColor = 'rgba(0, 255, 136, 0.5)';
-            userContainer.style.transform = 'translateY(-2px)';
-            userContainer.style.boxShadow = '0 4px 15px rgba(0, 255, 136, 0.3)';
-        });
-        
-        userContainer.addEventListener('mouseleave', () => {
-            userContainer.style.background = 'rgba(0, 255, 136, 0.1)';
-            userContainer.style.borderColor = 'rgba(0, 255, 136, 0.3)';
-            userContainer.style.transform = 'translateY(0)';
-            userContainer.style.boxShadow = 'none';
-        });
-        
-        // Hover nos itens do menu
-        const menuItems = dropdownMenu.querySelectorAll('a, #logoutBtnHeader');
-        menuItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.style.background = 'rgba(0, 255, 136, 0.1)';
             });
-            item.addEventListener('mouseleave', () => {
-                item.style.background = 'transparent';
-            });
-        });
         
-        // EVENTO DE LOGOUT CORRIGIDO
-        logoutBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            
-            if (confirm('Deseja realmente sair da sua conta?')) {
-                console.log('🚪 Fazendo logout do header...');
-                
-                // Limpar TODOS os dados de sessão
-                localStorage.removeItem('gymp2_current_user');
-                localStorage.removeItem('currentUser');
-                sessionStorage.removeItem('gymp2_token');
-                sessionStorage.removeItem('gymp2_user');
-                
-                // Mostrar feedback
-                if (window.notifications) {
-                    window.notifications.success('Logout realizado com sucesso!');
-                } else {
-                    alert('Logout realizado!');
-                }
-                
-                // Remover o dropdown imediatamente
-                const userContainer = document.getElementById('userHeaderContainer');
-                if (userContainer) {
-                    userContainer.remove();
-                }
-                
-                // Recriar o botão de login
-                recreateLoginButton();
-                
-                // Recarregar a página após 1 segundo para sincronizar tudo
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-            }
-        });
-        
-        console.log('✅ Dropdown do usuário configurado');
-    }
-    
-    // FUNÇÃO PARA RECRIAR BOTÃO DE LOGIN
-    function recreateLoginButton() {
-        const rightControls = document.querySelector('.right-controls');
-        if (!rightControls) return;
-        
-        // Criar botão de login
-        const loginBtn = document.createElement('div');
-        loginBtn.className = 'gym-access-btn';
-        loginBtn.innerHTML = `
-            <a href="login-gym.html" style="color: #00ff88; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-                <i class="fas fa-sign-in-alt"></i>
-                <span>Login</span>
-            </a>
-        `;
-        
-        // Inserir no lugar correto
-        const menuTrigger = document.getElementById('menuTrigger');
-        if (menuTrigger) {
-            menuTrigger.parentNode.insertBefore(loginBtn, menuTrigger);
-        } else {
-            rightControls.appendChild(loginBtn);
-        }
-        
-        console.log('✅ Botão de login recriado');
-    }
-    
-})();
-// NÃO ADICIONE A FUNÇÃO logout() AQUI - ELA FOI REMOVIDA
-</script>
-<script>
-// ========== DEBUG E VERIFICAÇÃO ==========
-console.log('🚀 Script de login carregado!');
-
-// Verificar se há usuário logado imediatamente
-const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
-console.log('📦 Dados do usuário no localStorage:', userData);
-
-if (userData) {
-    try {
-        const user = JSON.parse(userData);
-        console.log('👤 Usuário parseado:', user);
-    } catch (error) {
-        console.error('❌ Erro ao fazer parse:', error);
-    }
-}
-
-// ========== SISTEMA PRINCIPAL ATUALIZADO ==========
-function initLoginSystem() {
-    console.log('🔧 Iniciando sistema de login...');
-    
-    const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
-    
-    if (userData) {
-        try {
-            const user = JSON.parse(userData);
-            console.log(' Usuário logado detectado:', user.name);
-            updateUIForLoggedUser(user);
-        } catch (error) {
-            console.error(' Erro ao processar usuário:', error);
-        }
-    } else {
-        console.log('ℹ️ Nenhum usuário logado');
-        resetUIForLoggedOut();
-    }
-}
-
-// ========== ATUALIZAR INTERFACE PARA USUÁRIO LOGADO ==========
-function updateUIForLoggedUser(user) {
-    console.log('🎨 Atualizando UI para usuário logado:', user.name);
-    
-    // 1. Atualizar header principal
-    updateMainHeader(user);
-    
-    // 2. Atualizar menu hamburguer
-    updateHamburgerMenu(user);
-    
-    console.log('✅ UI atualizada com sucesso!');
-}
-
-// ========== ATUALIZAR HEADER PRINCIPAL ==========
-function updateMainHeader(user) {
-    const rightControls = document.querySelector('.right-controls');
-    if (!rightControls) {
-        console.error('❌ .right-controls não encontrado');
-        return;
-    }
-
-    // Remover botão Login existente
-    const loginButtons = rightControls.querySelectorAll('.gym-access-btn');
-    loginButtons.forEach(btn => {
-        if (btn.textContent.includes('Login') || btn.querySelector('a')?.textContent.includes('Login')) {
-            console.log('🗑 Removendo botão Login do header');
-            btn.remove();
-        }
-    });
-
-    // Verificar se já existe o componente de usuário
-    if (document.getElementById('userHeaderContainer')) {
-        console.log('ℹ️ Header de usuário já existe');
-        return;
-    }
-
-    // Criar componente do usuário
-    const initials = user.name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
-    const firstName = user.name.split(' ')[0];
-
-    const userHTML = `
-        <div class="user-header-container" id="userHeaderContainer" style="
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(0, 255, 136, 0.1);
-            border: 2px solid rgba(0, 255, 136, 0.3);
-            border-radius: 30px;
-            padding: 6px 16px 6px 6px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        ">
-            <div class="user-avatar" style="
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 700;
-                font-size: 16px;
-                color: #000;
-                border: 2px solid #fff;
-            ">${initials}</div>
-            
-            <span class="user-name-text" style="
-                font-size: 14px;
-                font-weight: 600;
-                color: #fff;
-            ">${firstName}</span>
-            
-            <div class="user-dropdown-menu" id="userDropdownMenu" style="
-                position: absolute;
-                top: calc(100% + 10px);
-                right: 0;
-                background: #1a1a1a;
-                border: 2px solid rgba(0, 255, 136, 0.3);
-                border-radius: 16px;
-                padding: 12px;
-                min-width: 220px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-10px);
-                transition: all 0.3s ease;
-                z-index: 3000;
-            ">
-                <div style="padding: 12px; border-bottom: 1px solid rgba(0, 255, 136, 0.2); margin-bottom: 8px;">
-                    <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px;">${user.name}</div>
-                    <div style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">${user.email || 'usuario@gymp2.com'}</div>
-                </div>
-                
-                <a href="#perfil" style="
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    padding: 12px;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    transition: all 0.2s ease;
-                    color: #fff;
-                    text-decoration: none;
-                    margin-bottom: 4px;
-                ">
-                    <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                    </svg>
-                    Meu Perfil
-                </a>
-                
-                <div id="logoutBtn" style="
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    padding: 12px;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    transition: all 0.2s ease;
-                    color: #ff4444;
-                    border-top: 1px solid rgba(255, 68, 68, 0.2);
-                    margin-top: 8px;
-                ">
-                    <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
-                    </svg>
-                    Sair
-                </div>
-            </div>
-        </div>
-    `;
-
-    // Inserir antes do menu hamburguer
-    const menuTrigger = document.getElementById('menuTrigger');
-    if (menuTrigger) {
-        menuTrigger.insertAdjacentHTML('beforebegin', userHTML);
-        console.log('✅ Header de usuário inserido no header principal');
-    } else {
-        rightControls.insertAdjacentHTML('beforeend', userHTML);
-        console.log('✅ Header de usuário inserido no final do header');
-    }
-
-    // Configurar eventos do dropdown
-    setupUserDropdownEvents();
-}
-
-// ========== ATUALIZAR MENU HAMBURGUER ==========
-function updateHamburgerMenu(user) {
-    console.log('🍔 Atualizando menu hamburguer...');
-    
-    const navigationList = document.querySelector('.navigation-list');
-    if (!navigationList) {
-        console.error('❌ .navigation-list não encontrado');
-        return;
-    }
-
-    // Encontrar item de Login
-    const navItems = navigationList.querySelectorAll('.nav-item');
-    let loginItem = null;
-    
-    navItems.forEach(item => {
-        const link = item.querySelector('.nav-link');
-        if (link && (link.textContent.trim() === 'Login' || link.getAttribute('href') === '#espaço-cliente')) {
-            loginItem = item;
-            console.log('🔍 Item de login encontrado no menu');
-        }
-    });
-
-    if (loginItem) {
-        const firstName = user.name.split(' ')[0];
-        
-        // Substituir Login por Perfil
-        loginItem.innerHTML = `
-            <a href="#perfil" class="nav-link" style="color: #00ff88; font-weight: 700; background: rgba(0, 255, 136, 0.1); border-radius: 8px; margin: 5px 0; padding: 12px 15px !important;">
-                <i class="fas fa-user" style="margin-right: 10px;"></i>
-                Meu Perfil (${firstName})
-            </a>
-        `;
-        console.log('✅ Login substituído por Perfil no menu');
-
-        // Remover logout existente
-        const existingLogout = document.getElementById('menuLogoutBtn');
-        if (existingLogout) {
-            existingLogout.closest('.nav-item').remove();
-            console.log('🗑 Logout anterior removido');
-        }
-
-        // Adicionar item Sair
-        const logoutItem = document.createElement('li');
-        logoutItem.className = 'nav-item';
-        logoutItem.innerHTML = `
-            <a href="#logout" class="nav-link" style="color: #ff4444; background: rgba(255, 68, 68, 0.1); border-radius: 8px; margin: 5px 0; padding: 12px 15px !important;" id="menuLogoutBtn">
-                <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>
-                Sair
-            </a>
-        `;
-        
-        navigationList.appendChild(logoutItem);
-        console.log('✅ Item Sair adicionado ao menu');
-
-        // Configurar evento de logout
-        const menuLogoutBtn = document.getElementById('menuLogoutBtn');
-        if (menuLogoutBtn) {
-            menuLogoutBtn.addEventListener('click', (e) => {
-                e.preventDefault();
+            // Logout
+            logoutBtn.addEventListener('click', () => {
                 if (confirm('Deseja realmente sair da sua conta?')) {
                     console.log('🚪 Fazendo logout...');
-                    localStorage.removeItem('gymp2_current_user');
                     localStorage.removeItem('currentUser');
+                    localStorage.removeItem('gymp2_current_user');
                     alert('Logout realizado com sucesso!');
                     window.location.reload();
                 }
             });
-        }
-    } else {
-        console.log('⚠️ Item de login não encontrado no menu hamburguer');
-    }
-}
-
-// ========== CONFIGURAR EVENTOS DO DROPDOWN ==========
-function setupUserDropdownEvents() {
-    const userContainer = document.getElementById('userHeaderContainer');
-    const dropdownMenu = document.getElementById('userDropdownMenu');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    if (!userContainer || !dropdownMenu || !logoutBtn) {
-        console.error('❌ Elementos do dropdown não encontrados');
-        return;
-    }
-
-    // Toggle dropdown
-    userContainer.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isVisible = dropdownMenu.style.opacity === '1';
         
-        if (isVisible) {
-            dropdownMenu.style.opacity = '0';
-            dropdownMenu.style.visibility = 'hidden';
-            dropdownMenu.style.transform = 'translateY(-10px)';
-        } else {
-            dropdownMenu.style.opacity = '1';
-            dropdownMenu.style.visibility = 'visible';
-            dropdownMenu.style.transform = 'translateY(0)';
-        }
-    });
-
-    // Fechar ao clicar fora
-    document.addEventListener('click', () => {
-        dropdownMenu.style.opacity = '0';
-        dropdownMenu.style.visibility = 'hidden';
-        dropdownMenu.style.transform = 'translateY(-10px)';
-    });
-
-    // Logout
-    logoutBtn.addEventListener('click', () => {
-        if (confirm('Deseja realmente sair da sua conta?')) {
-            console.log('🚪 Fazendo logout...');
-            localStorage.removeItem('currentUser');
-            localStorage.removeItem('gymp2_current_user');
-            alert('Logout realizado com sucesso!');
-            window.location.reload();
-        }
-    });
-
-    console.log('✅ Eventos do dropdown configurados');
-}
-
-// ========== RESTAURAR INTERFACE PADRÃO ==========
-function resetUIForLoggedOut() {
-    console.log('🔄 Restaurando interface para usuário deslogado...');
-    
-    // Remover header de usuário se existir
-    const userHeader = document.getElementById('userHeaderContainer');
-    if (userHeader) {
-        userHeader.remove();
-        console.log('🗑 Header de usuário removido');
-    }
-    
-    // Restaurar menu hamburguer será feito automaticamente ao recarregar
-}
-
-// ========== INICIAR SISTEMA ==========
-
-// Executar quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('📄 DOM carregado, iniciando sistema...');
-    setTimeout(initLoginSystem, 100);
-});
-
-// Executar também se a página já estiver carregada
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    console.log('⚡ Página já carregada, iniciando sistema...');
-    setTimeout(initLoginSystem, 100);
-}
-
-// Observar mudanças no localStorage
-window.addEventListener('storage', function(e) {
-    if ((e.key === 'currentUser' || e.key === 'gymp2_current_user')) {
-        console.log('🔄 Mudança no localStorage detectada, recarregando...');
-        setTimeout(() => {
-            window.location.reload();
-        }, 500);
-    }
-});
-
-console.log('🎯 Sistema de login carregado e pronto!');
-</script>
-
-<!--JavaScript para aplicar configurações globais-->
-<script>
-    // Aplicar configurações globais - PARA TODAS AS PÁGINAS
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Aplicando configurações globais...');
-        applyGlobalSettings();
-        
-        // Verificar se as configurações foram aplicadas
-        setTimeout(() => {
-            console.log('Configurações aplicadas:', {
-                tema: localStorage.getItem('gym-theme'),
-                fonte: localStorage.getItem('gym-fontSize'),
-                bodyClass: document.body.className
-            });
-        }, 500);
-    });
-
-    function applyGlobalSettings() {
-        // Carregar configurações salvas
-        const savedTheme = localStorage.getItem('gym-theme') || 'dark';
-        const savedFontSize = localStorage.getItem('gym-fontSize') || 'medium';
-        
-        console.log('Configurações carregadas:', { savedTheme, savedFontSize });
-        
-        // Aplicar tema
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-mode');
-            console.log('Modo claro aplicado');
-        } else {
-            document.body.classList.remove('light-mode');
-            console.log('Modo escuro aplicado');
+            console.log('✅ Eventos do dropdown configurados');
         }
         
-        // Aplicar tamanho da fonte
-        applyFontSize(savedFontSize);
-    }
-
-    function applyFontSize(size) {
-        const sizes = {
-            'small': { 
-                h1: '32px', h2: '24px', h3: '18px' ,
-                normal: '14px', small: '12px',
-                button: '14px'
-            },
-            'medium': { 
-                h1: '42px', h2: '28px', h3: '22px',
-                normal: '16px', small: '14px',
-                button: '16px'
-            },
-            'large': { 
-                h1: '52px', h2: '32px', h3: '26px',
-                normal: '18px', small: '16px',
-                button: '18px'
+        // ========== RESTAURAR INTERFACE PADRÃO ==========
+        function resetUIForLoggedOut() {
+            console.log('🔄 Restaurando interface para usuário deslogado...');
+            
+            // Remover header de usuário se existir
+            const userHeader = document.getElementById('userHeaderContainer');
+            if (userHeader) {
+                userHeader.remove();
+                console.log('🗑 Header de usuário removido');
             }
-           
-        };
-
-        const currentSizes = sizes[size];
+            
+            // Restaurar menu hamburguer será feito automaticamente ao recarregar
+        }
         
-        console.log('Aplicando tamanho de fonte:', size, currentSizes);
+        // ========== INICIAR SISTEMA ==========
         
-        // Aplicar a todos os elementos
-        setTimeout(() => {
-            // Títulos principais
-            document.querySelectorAll('h1').forEach(el => {
-                el.style.fontSize = currentSizes.h1;
-            });
+        // Executar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM carregado, iniciando sistema...');
+            setTimeout(initLoginSystem, 100);
+        });
+        
+        // Executar também se a página já estiver carregada
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            console.log('⚡ Página já carregada, iniciando sistema...');
+            setTimeout(initLoginSystem, 100);
+        }
+        
+        // Observar mudanças no localStorage
+        window.addEventListener('storage', function(e) {
+            if ((e.key === 'currentUser' || e.key === 'gymp2_current_user')) {
+                console.log('🔄 Mudança no localStorage detectada, recarregando...');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            }
+        });
+        
+        console.log('🎯 Sistema de login carregado e pronto!');
+    </script>
+    
+    <!--JavaScript para aplicar configurações globais-->
+    <script>
+        // Aplicar configurações globais - PARA TODAS AS PÁGINAS
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Aplicando configurações globais...');
+            applyGlobalSettings();
             
-            // Títulos secundários
-            document.querySelectorAll('h2').forEach(el => {
-                el.style.fontSize = currentSizes.h2;
-            });
+            // Verificar se as configurações foram aplicadas
+            setTimeout(() => {
+                console.log('Configurações aplicadas:', {
+                    tema: localStorage.getItem('gym-theme'),
+                    fonte: localStorage.getItem('gym-fontSize'),
+                    bodyClass: document.body.className
+                });
+            }, 500);
+        });
+    
+        function applyGlobalSettings() {
+            // Carregar configurações salvas
+            const savedTheme = localStorage.getItem('gym-theme') || 'dark';
+            const savedFontSize = localStorage.getItem('gym-fontSize') || 'medium';
             
-            // Títulos terciários
-            document.querySelectorAll('h3').forEach(el => {
-                el.style.fontSize = currentSizes.h3;
-            });
+            console.log('Configurações carregadas:', { savedTheme, savedFontSize });
             
-            // Textos normais
-            document.querySelectorAll('p, .setting-description, .feedback-text, .nav-link, .result-title, .profile-info p, .feedback-text').forEach(el => {
-                el.style.fontSize = currentSizes.normal;
-            });
+            // Aplicar tema
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                console.log('Modo claro aplicado');
+            } else {
+                document.body.classList.remove('light-mode');
+                console.log('Modo escuro aplicado');
+            }
             
-            // Botões
-            document.querySelectorAll('.gym-access-btn, .edit-profile-btn, .menu-search-btn').forEach(el => {
-                el.style.fontSize = currentSizes.button;
-            });
+            // Aplicar tamanho da fonte
+            applyFontSize(savedFontSize);
+        }
+    
+        function applyFontSize(size) {
+            const sizes = {
+                'small': { 
+                    h1: '32px', h2: '24px', h3: '18px',
+                    normal: '14px', small: '12px',
+                    button: '14px'
+                },
+                'medium': { 
+                    h1: '42px', h2: '28px', h3: '22px',
+                    normal: '16px', small: '14px',
+                    button: '16px'
+                },
+                'large': { 
+                    h1: '52px', h2: '32px', h3: '26px',
+                    normal: '18px', small: '16px',
+                    button: '18px'
+                }
+            };
+    
+            const currentSizes = sizes[size];
             
-            // Textos pequenos
-            document.querySelectorAll('.feedback-date, .setting-description, small, .result-description, .feedback-date').forEach(el => {
-                el.style.fontSize = currentSizes.small;
-            });
+            console.log('Aplicando tamanho de fonte:', size, currentSizes);
             
-            // Estatísticas
-            document.querySelectorAll('.stat-box p').forEach(el => {
-                el.style.fontSize = currentSizes.h2;
-            });
-            
-            document.querySelectorAll('.stat-box h3').forEach(el => {
-                el.style.fontSize = currentSizes.normal;
-            });
-
-            console.log('Tamanhos de fonte aplicados com sucesso');
-        }, 100);
-    }
-
-    // Função para forçar atualização (útil para debugging)
-    function forceUpdateSettings() {
-        console.log('Forçando atualização das configurações...');
-        applyGlobalSettings();
-    }
-
-    // Adicionar listener para mudanças no localStorage (opcional)
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'gym-theme' || e.key === 'gym-fontSize') {
-            console.log('Configurações alteradas em outra aba, aplicando...');
+            // Aplicar a todos os elementos
+            setTimeout(() => {
+                // Títulos principais
+                document.querySelectorAll('h1').forEach(el => {
+                    el.style.fontSize = currentSizes.h1;
+                });
+                
+                // Títulos secundários
+                document.querySelectorAll('h2').forEach(el => {
+                    el.style.fontSize = currentSizes.h2;
+                });
+                
+                // Títulos terciários
+                document.querySelectorAll('h3').forEach(el => {
+                    el.style.fontSize = currentSizes.h3;
+                });
+                
+                // Textos normais
+                document.querySelectorAll('p, .setting-description, .feedback-text, .nav-link, .result-title, .profile-info p, .feedback-text').forEach(el => {
+                    el.style.fontSize = currentSizes.normal;
+                });
+                
+                // Botões
+                document.querySelectorAll('.gym-access-btn, .edit-profile-btn, .menu-search-btn').forEach(el => {
+                    el.style.fontSize = currentSizes.button;
+                });
+                
+                // Textos pequenos
+                document.querySelectorAll('.feedback-date, .setting-description, small, .result-description, .feedback-date').forEach(el => {
+                    el.style.fontSize = currentSizes.small;
+                });
+                
+                // Estatísticas
+                document.querySelectorAll('.stat-box p').forEach(el => {
+                    el.style.fontSize = currentSizes.h2;
+                });
+                
+                document.querySelectorAll('.stat-box h3').forEach(el => {
+                    el.style.fontSize = currentSizes.normal;
+                });
+    
+                console.log('Tamanhos de fonte aplicados com sucesso');
+            }, 100);
+        }
+    
+        // Função para forçar atualização (útil para debugging)
+        function forceUpdateSettings() {
+            console.log('Forçando atualização das configurações...');
             applyGlobalSettings();
         }
-    });
-</script>
-
-<script>
-  // ========== FUNÇÃO PARA REDIRECIONAR PARA PERFIL ==========
-function redirectToProfile() {
-    const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
     
-    if (userData) {
-        try {
-            const user = JSON.parse(userData);
-            console.log(' Redirecionando para perfil do usuário:', user.name);
-            window.location.href = 'perfil.html';
-        } catch (error) {
-            console.error(' Erro ao redirecionar:', error);
-            window.location.href = 'login-gym.html';
+        // Adicionar listener para mudanças no localStorage (opcional)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'gym-theme' || e.key === 'gym-fontSize') {
+                console.log('Configurações alteradas em outra aba, aplicando...');
+                applyGlobalSettings();
+            }
+        });
+    </script>
+    
+    <script>
+        // ========== FUNÇÃO PARA REDIRECIONAR PARA PERFIL ==========
+        function redirectToProfile() {
+            const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
+            
+            if (userData) {
+                try {
+                    const user = JSON.parse(userData);
+                    console.log(' Redirecionando para perfil do usuário:', user.name);
+                    window.location.href = 'perfil.html';
+                } catch (error) {
+                    console.error(' Erro ao redirecionar:', error);
+                    window.location.href = 'login-gym.html';
+                }
+            } else {
+                alert('Você precisa fazer login primeiro!');
+                window.location.href = 'login-gym.html';
+            }
         }
-    } else {
-        alert('Você precisa fazer login primeiro!');
-        window.location.href = 'login-gym.html';
-    }
-}
-</script>
-
+    </script>
 </body>
 </html>
