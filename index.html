@@ -1,1389 +1,2836 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Gym P2 | Fitness e Bem-Estar</title>
-    <link rel="stylesheet" href="menu-inicial.css">
-</head>
-<body>
-   <header class="header-container" id="menu">
-    <div class="nav-wrapper">
-        <div class="brand-container">
-            <a href="#"><img src="logo.png" alt="Logo" class="logo-img"></a>
-        </div>
-        <div class="right-controls">
-            <div class="search-widget" id="searchWidget">
-                <div class="expandable-search-field" id="searchField">
-                    <input type="text" class="search-input-field" placeholder="Digite sua pesquisa..." id="searchInput">
-                </div>
-                <button class="search-toggle-btn" id="searchToggle" aria-label="Abrir pesquisa">
-                    <svg class="search-icon" viewBox="0 0 24 24">
-                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    </svg>
-                </button>
-                <div class="search-results" id="searchResults"></div>
-            </div>  
-            <!-- ADICIONE A CLASSE home-btn AQUI -->
-            <a href="index.html"><button class="gym-access-btn home-btn"><i class="fas fa-home"></i> Home</button></a>
-            <a href="academias-publicas.html"><button class="gym-access-btn"><i class="fas fa-dumbbell"></i> Academias</button></a>
-            <a href="login-gym.html"><button class="gym-access-btn"><i class="fas fa-sign-in-alt"></i> Login</button></a>
-            <button class="menu-trigger" id="menuTrigger" aria-label="Abrir menu">
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-            </button>
-        </div>
-    </div>
-</header>
- <!-- NO TOPO DO perfil.html, DEPOIS DO HEADER -->
-<div id="deletionWarningBanner" style="display: none; margin: 10px 20px;">
-    <div style="background: linear-gradient(90deg, #ff9500, #ff5e00); 
-                color: white; padding: 12px 20px; border-radius: 8px; 
-                text-align: center; position: relative;">
-        <strong>⚠️ CONTA AGENDADA PARA EXCLUSÃO</strong>
-        <p style="margin: 5px 0; font-size: 14px;">
-            Sua conta será excluída em <span id="profileDaysRemaining">X</span> dias.
-            <a href="config.html" style="color: #00ff40; text-decoration: underline; margin-left: 10px;">
-                Clique aqui para cancelar
-            </a>
-        </p>
-        <button onclick="closeWarningBanner()" 
-                style="position: absolute; right: 10px; top: 10px; 
-                       background: rgba(255,255,255,0.2); border: none; 
-                       color: white; border-radius: 50%; width: 24px; height: 24px; 
-                       cursor: pointer; font-size: 16px;">×</button>
-    </div>
-</div>
-
-
-
-    <nav class="slide-menu" id="slideMenu">
-        <div class="menu-header">
-            <button class="menu-close-btn" id="menuCloseBtn" aria-label="Fechar menu">
-                <svg class="menu-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-        </div>
-       <a href="academias-publicas.html"><button class="menu-search-btn">
-            <i class="fas fa-search"></i> Academias
-        </button>
-        </a> 
-        <ul class="navigation-list">
-            <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
-            <li class="nav-item"><a href="#espaço-cliente" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-            <li class="nav-item"><a href="Filtro_personal.html" class="nav-link"><i class="fas fa-percent"></i>Personal</a></li>
-            <li class="nav-item"><a href="#news" class="nav-link"><i class="fas fa-gift"></i> Sorteios</a></li>
-            <li class="nav-item"><a href="config.html" class="nav-link"><i class="fas fa-cog"></i> Configurações</a></li>
-            <li class="nav-item"><a href="Sobre_nós.html" class="nav-link"><i class="fas fa-info-circle"></i> Sobre nós</a></li>
-        </ul>
-    </nav>
-    <div class="menu-overlay" id="menuOverlay"></div>
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Bem vindo ao Gym P2, aqui você encontra: 
-                        <span class="rotating-text-wrapper">
-                            <div class="rotating-text creative">Academias</div>
-                            <div class="rotating-text innovative">Artes Marciais</div>
-                            <div class="rotating-text professional">Blogs e dicas</div>
-                            <div class="rotating-text dynamic">Sorteios</div>
-                        </span>
-                    </h1>
-                    <div class="linha-basica"></div>
-                    <p class="hero-description">
-                        <span class="sentence-1">O site Gym P2 foi criado com o objetivo de facilitar o acesso da comunidade local a informações sobre saúde, bem-estar e atividades físicas e também para ajudar a população da cidade de Pedro II.</span> 
-                        <span class="sentence-2">A iniciativa busca aproximar a academia dos moradores, oferecendo um espaço digital onde é possível conhecer os serviços disponíveis, os horários de funcionamento, planos de treinamento, eventos e até dicas de exercícios e nutrição.</span> 
-                        <span class="sentence-3">Além disso, a presença online fortalece a divulgação das academias e ajuda a população da cidade em questão de achar qual a academia mais próxima e custo benefício para você treinar!</span>
-                    </p>
-                    <a href="Sobre_nós.html"><button class="start-button">Sobre nós</button></a>
-                </div>
-                <div class="workout-card">
-                    <div class="workout-header">
-                        <div class="workout-title"></div>
-                    </div>
-                    <div class="workout-image">
-                        <div class="circle-progress">
-                            <div class="workout-man"></div>
-                        </div>
-                        <div class="circle-progress2">
-                            <div class="slider">
-                                <div class="slide1"></div>
-                                <div class="slide1"></div>
-                                <div class="slide1"></div>
-                                <div class="slide1"></div>
-                                <div class="slide1"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="dois">
-        <div class="section-header">
-            <h1 class="section-title">Academias Destaque</h1>
-        </div>
-        <div class="cards">
-            <div class="academy-card1" data-type="musculacao" data-location="centro" data-price="60">
-                <div class="price-badge">R$ 70/mês</div>
-                <div class="card-image" style="background-image: url('vilafitness_fachada.png')">
-                </div>
-                <div class="card-content">
-                    <h3 class="academy-name">Vila Fitness</h3>
-                    <span class="academy-type">Tipo: Musculação</span>
-                    <div class="academy-location">R. Raimundo nonato Brandão 776,Pedro II - PI, 64255-000</div>
-                    <div class="schedule-section">
-                        <div class="schedule">
-                            <div class="schedule-line"><strong>Seg a Sex:</strong> Aberto 05:00 - 22:00</div>
-                            <div class="schedule-line"><strong>Sáb/Feriados:</strong> 08:00 - 14:00</div>
-                        </div>
-                    </div>
-                    <a href="vilafitness.html" class="view-details-btn">Ver Detalhes</a>
-                </div>
-            </div>
-            <div class="academy-card1" data-type="musculacao" data-location="centro" data-price="60">
-                <div class="price-badge">R$ 80/mês</div>
-                <div class="card-image" style="background-image: url('')">
-                </div>
-                <div class="card-content">
-                    <h3 class="academy-name"></h3>
-                    <span class="academy-type">Tipo: Musculação</span>
-                    <div class="academy-location">Av. José Lourenço Mourão nº 419 - Pedro II - PI
-</div>
-                    <div class="schedule-section">
-                        <div class="schedule">
-                            <div class="schedule-line"><strong>Seg a Sex:</strong> 5:30 - 22h</div>
-                            <div class="schedule-line"><strong>Sáb/Feriados:</strong> 7:30h - 13h</div>
-                        </div>
-                    </div>
-                    <a href="topx.html" class="view-details-btn">Ver Detalhes</a>
-                </div>
-            </div>
-            
-            <div class="academy-card1" data-type="musculacao" data-location="centro" data-price="60">
-                <div class="price-badge">R$ 80/mês</div>
-                <div class="card-image" style="background-image: url('Opala-Fitness.png')">
-                </div>
-                <div class="card-content">
-                    <h3 class="academy-name">Opala-Fitness</h3>
-                    <span class="academy-type">Tipo: Musculação</span>
-                    <div class="academy-location"> RUA: CORINTO ANDRADE N° 143 - CENTRO
-
-PEDRO II - PI, em frente conselho do tutelar</div>
-                    <div class="schedule-section">
-                        <div class="schedule">
-                            <div class="schedule-line"><strong>Seg a Sex:</strong>  5:00h às 21:00h </div>
-                            <div class="schedule-line"><strong>Sáb/Feriados:</strong> 7:00 h às 16:00 h</div>
-                        </div>
-                    </div>
-                    <a href="Opala-Fitness.html" class="view-details-btn">Ver Detalhes</a>
-                </div>
-            </div>
-        </div>
-        
-    </section>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <section class="quatro">
-        <div class="accent-bar"></div>
-        <div class="personal-wrapper">
-            <!-- LADO ESQUERDO -->
-            <div class="personal-text">
-                <h1 class="personal-title">
-                    Personal Trainers:<br>
-                    Seu parceiro nos treinos!
-                </h1>
+  <!-- Meta tags SEO -->
+  <meta name="description" content="Gym P2 - Encontre academias, personal trainers, artes marciais e produtos fitness em Pedro II - PI. Tudo para sua saúde e bem-estar.">
+  <meta name="keywords" content="academia, fitness, Pedro II, personal trainer, musculação, saúde, bem-estar, treino, exercícios">
+  <meta name="author" content="Gym P2">
+  <meta property="og:title" content="Gym P2 | Fitness e Bem-Estar">
+  <meta property="og:description" content="Conectando você às melhores academias e profissionais de fitness em Pedro II">
+  <meta property="og:image" content="https://seusite.com/logo.png">
+  <meta property="og:url" content="https://seusite.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gym P2 | Fitness e Bem-Estar">
+  <meta name="twitter:description" content="Sua plataforma completa de fitness em Pedro II">
+  
+  <!-- PWA -->
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkd5bSBQMiAtIEZpdG5lc3MgZSBCZW0tRXN0YXIiLAogICJzaG9ydF9uYW1lIjogIkd5bSBQMiIsCiAgImRlc2NyaXB0aW9uIjogIkVuY29udHJlIGFjYWRlbWlhcywgcGVyc29uYWwgdHJhaW5lcnMgZSBwcm9kdXRvcyBmaXRuZXNzIGVtIFBlZHJvIElJIC0gUEkiLAogICJzdGFydF91cmwiOiAiLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzAwMDAwMCIsCiAgInRoZW1lX2NvbG9yIjogIiMwMGZmNDAiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJpY29uLTE5MngxOTIucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbi01MTJ4NTEyLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+  <meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" href="icon-192x192.png">
+  
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <title>gym P2 | Fitness e Bem-Estar</title>
+  
+  <style>
+    /* ========== VARIÁVEIS E RESET ========== */
+    :root {
+      --neon-primary: #00ff40;
+      --neon-secondary: #00ff88;
+      --neon-glow: rgba(0, 255, 64, 0.3);
+      --dark-0: #000000;
+      --dark-1: #0a0a0a;
+      --dark-2: #111111;
+      --dark-3: #1a1a1a;
+      --light-0: #ffffff;
+      --light-1: #f5f5f5;
+      --light-2: #e0e0e0;
+      --gray-1: #888888;
+      --gray-2: #444444;
+      --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --border-radius-sm: 8px;
+      --border-radius-md: 16px;
+      --border-radius-lg: 24px;
+      --border-radius-xl: 32px;
+      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.15);
+      --shadow-heavy: 0 16px 60px rgba(0, 0, 0, 0.25);
+      --gradient-neon: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
+      --gradient-dark: linear-gradient(135deg, var(--dark-1), var(--dark-3));
+      
+      /* Variáveis de animação otimizadas */
+      --animate-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --animate-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --animate-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-                <p class="personal-subtitle">
-                    Conecte-se com profissionais qualificados e alcance seus objetivos
-                </p>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-                <ul class="info-list">
-                    <li class="info-item">
-                        <span class="bullet"></span>
-                        <span>Encontre personal trainers próximos a você</span>
-                    </li>
-                    <li class="info-item">
-                        <span class="bullet"></span>
-                        <span>Veja avaliações e especialidades</span>
-                    </li>
-                    <li class="info-item">
-                        <span class="bullet"></span>
-                        <span>Agende sua primeira sessão gratuita</span>
-                    </li>
-                    <li class="info-item">
-                        <span class="bullet"></span>
-                        <span>Profissionais certificados e experientes</span>
-                    </li>
-                </ul>
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
 
-                <p class="extra-info">
-                    Tudo isso de graça!
-                </p>
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--dark-0);
+      color: var(--light-0);
+      line-height: 1.6;
+      overflow-x: hidden;
+      font-weight: 400;
+      font-display: swap;
+    }
 
-                <div class="cta-buttons">
-                    <a href="Filtro_personal.html" class="btn btn-download">
-                        <i class="fas fa-search"></i>
-                        Encontrar Personal
-                    </a>
-                    
-                    <a href="Cadastrar_personal.html" class="btn btn-secondary">
-                        <i class="fas fa-user-plus"></i>
-                        Cadastre-se
-                    </a>
-                </div>
-            </div>
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
 
-            <!-- LADO DIREITO - MOCKUPS -->
-            <div class="phones-mockup">
-                <div class="phone phone-1">
-                    <div class="phone-screen">
-                        <div class="notch"></div>
-                        <div class="screen-content">
-                            <div class="screen-header">
-                                <h4>Personal Trainers</h4>
-                                <p>Encontre o seu</p>
-                            </div>
-                            <div class="screen-card">
-                                <span class="card-info">Profissionais</span>
-                                <span class="card-value">150+</span>
-                            </div>
-                            <div class="screen-card">
-                                <span class="card-info">Avaliação</span>
-                                <span class="card-value">5.0 ★</span>
-                            </div>
-                            <div class="screen-card">
-                                <span class="card-info">Alunos</span>
-                                <span class="card-value">2.5K</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    /* ========== HEADER COM ACESSIBILIDADE ========== */
+    .header-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 2000;
+      backdrop-filter: blur(25px) saturate(180%);
+      background: rgba(0, 0, 0, 0.85);
+      border-bottom: 1px solid rgba(0, 255, 64, 0.2);
+      transition: all 0.4s var(--transition-smooth);
+      padding: 1.2rem 2.5rem;
+    }
 
-                <div class="phone phone-2">
-                    <div class="phone-screen">
-                        <div class="notch"></div>
-                        <div class="screen-content">
-                            <div class="screen-header">
-                                <h4>Seus Treinos</h4>
-                                <p>Acompanhamento</p>
-                            </div>
-                            <div class="screen-card">
-                                <span class="card-info">Treinos/Mês</span>
-                                <span class="card-value">16</span>
-                            </div>
-                            <div class="screen-card">
-                                <span class="card-info">Progresso</span>
-                                <span class="card-value">85%</span>
-                            </div>
-                            <div class="screen-card">
-                                <span class="card-info">Meta</span>
-                                <span class="card-value">4/4</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-   <footer class="academia-footer">
-        <div class="academia-background">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                width="100%" height="100%" viewBox="0 0 1600 900">
-                <defs>
-                    <!-- COR ALTERADA AQUI: #00ff40 com 30% de opacidade (4D em hex) -->
-                    <path id="wave" fill="#00ff404D" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
-                    s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z" />
-                </defs>
-                <g>
-                    <use xlink:href="#wave" opacity=".4">
-                        <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="8s" calcMode="spline"
-                            values="270 230; -334 180; 270 230" keyTimes="0; .5; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
-                            repeatCount="indefinite" />
-                    </use>
-                    <use xlink:href="#wave" opacity=".6">
-                        <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="6s" calcMode="spline"
-                            values="-270 230;243 220;-270 230" keyTimes="0; .6; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
-                            repeatCount="indefinite" />
-                    </use>
-                    <use xlink:href="#wave" opacty=".9">
-                        <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="4s" calcMode="spline"
-                            values="0 230;-140 200;0 230" keyTimes="0; .4; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
-                            repeatCount="indefinite" />
-                    </use>
-                </g>
+    .header-container:hover {
+      box-shadow: 0 12px 48px rgba(0, 255, 64, 0.25);
+    }
+
+    .nav-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .brand-container {
+      flex-shrink: 0;
+      transition: transform 0.4s var(--transition-smooth);
+    }
+
+    .brand-container:hover {
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    .logo-img {
+      height: 80px;
+      width: auto;
+      display: block;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 4px 8px rgba(0, 255, 64, 0.3));
+    }
+
+    .brand-container:hover .logo-img {
+      filter: drop-shadow(0 6px 12px rgba(0, 255, 64, 0.5));
+      transform: rotate(-2deg);
+    }
+
+    .right-controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: nowrap;
+    }
+
+    /* ========== BARRA DE PESQUISA ========== */
+    .search-widget {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .search-toggle-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gradient-neon);
+      border: 2px solid rgba(0, 255, 64, 0.3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s var(--transition-smooth);
+      position: relative;
+      z-index: 100;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(0, 255, 64, 0.3);
+      animation: pulseGlow 3s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 4px 15px rgba(0, 255, 64, 0.3); }
+      100% { box-shadow: 0 4px 20px rgba(0, 255, 64, 0.4), 0 0 15px rgba(0, 255, 64, 0.2); }
+    }
+
+    .search-toggle-btn:hover {
+      transform: scale(1.1) rotate(10deg);
+      background: linear-gradient(135deg, var(--neon-secondary), var(--neon-primary), var(--neon-secondary));
+      box-shadow: 0 6px 25px rgba(0, 255, 64, 0.5);
+    }
+
+    .search-icon {
+      width: 22px;
+      height: 22px;
+      fill: #000;
+      transition: all 0.4s ease;
+    }
+
+    .expandable-search-field {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid transparent;
+      border-radius: 30px;
+      width: 48px;
+      height: 48px;
+      overflow: hidden;
+      transition: all 0.6s var(--transition-smooth);
+      backdrop-filter: blur(20px);
+      z-index: 50;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .expandable-search-field.expanded {
+      width: 320px;
+      border-color: var(--neon-primary);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 8px 32px rgba(0, 255, 64, 0.25);
+      animation: searchExpand 0.6s var(--transition-smooth);
+    }
+
+    @keyframes searchExpand {
+      0% { width: 48px; opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { width: 320px; }
+    }
+
+    .search-input-field {
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 0 60px 0 20px;
+      font-size: 1rem;
+      color: #000;
+      font-family: inherit;
+      opacity: 0;
+      transition: opacity 0.3s ease 0.1s;
+      cursor: text;
+    }
+
+    .expandable-search-field.expanded .search-input-field {
+      opacity: 1;
+    }
+
+    /* ========== BOTÕES ========== */
+    .gym-access-btn {
+      background: var(--gradient-neon);
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.4s var(--transition-smooth);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 255, 64, 0.3);
+      border: 2px solid transparent;
+    }
+
+    .gym-access-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.7s ease;
+    }
+
+    .gym-access-btn:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 255, 64, 0.5);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .gym-access-btn:hover::before {
+      left: 100%;
+    }
+
+    /* Foco acessível */
+    button:focus, a:focus, input:focus {
+      outline: 2px solid var(--neon-primary);
+      outline-offset: 4px;
+    }
+
+    /* ========== MENU HAMBURGUER ========== */
+    .menu-trigger {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 12px;
+      background: transparent;
+      border: none;
+      z-index: 2001;
+      position: relative;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-trigger:hover {
+      transform: scale(1.1);
+    }
+
+    .hamburger-line {
+      width: 28px;
+      height: 4px;
+      background: var(--gradient-neon);
+      margin: 4px 0;
+      transition: all 0.5s var(--transition-smooth);
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 255, 64, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-trigger.active .hamburger-line:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .menu-trigger.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    .menu-trigger.active .hamburger-line:nth-child(3) {
+      transform: rotate(-45deg) translate(8px, -8px);
+    }
+
+    /* ========== MENU SLIDE ========== */
+    .slide-menu {
+      position: fixed;
+      top: 0;
+      right: -450px;
+      width: 450px;
+      height: 100vh;
+      background: var(--dark-0);
+      transition: right 0.6s var(--transition-smooth);
+      z-index: 3000;
+      padding: 2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid rgba(0, 255, 64, 0.2);
+    }
+
+    .slide-menu.open {
+      right: 0;
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .menu-close-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-close-btn:hover {
+      transform: rotate(90deg);
+    }
+
+    .menu-close-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--light-0);
+    }
+
+    .menu-search-btn {
+      width: 100%;
+      background: var(--gradient-neon);
+      color: #000;
+      border: none;
+      padding: 14px 20px;
+      border-radius: var(--border-radius-md);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+    }
+
+    .menu-search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 255, 64, 0.3);
+    }
+
+    .navigation-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+
+    .nav-item {
+      margin: 0;
+      width: 100%;
+    }
+
+    .nav-link {
+      color: var(--light-0);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      display: block;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-link:hover {
+      color: var(--neon-primary);
+      padding-left: 15px;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      z-index: 2500;
+      backdrop-filter: blur(8px);
+    }
+
+    .menu-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ========== HERO SECTION COM PARALLAX ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 3rem;
+      padding-top: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120%;
+      z-index: -2;
+      overflow: hidden;
+      background: linear-gradient(45deg, var(--dark-0) 0%, var(--dark-2) 100%);
+    }
+
+    .parallax-layer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+    }
+
+    .layer-1 { z-index: 1; }
+    .layer-2 { z-index: 2; }
+    .layer-3 { z-index: 3; }
+
+    .shape {
+      position: absolute;
+      border: 2px solid rgba(0, 255, 64, 0.3);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 255, 64, 0.15) 0%, transparent 70%);
+      box-shadow: 0 0 40px rgba(0, 255, 64, 0.2), inset 0 0 20px rgba(0, 255, 64, 0.1);
+      animation: float 20s infinite ease-in-out;
+      transform: translateZ(0);
+    }
+
+    .shape:nth-child(1) {
+      width: 400px;
+      height: 400px;
+      top: 5%;
+      left: 5%;
+      animation-delay: 0s;
+      border: 3px solid rgba(0, 255, 64, 0.4);
+      background: radial-gradient(circle, rgba(0, 255, 64, 0.2) 0%, transparent 70%);
+      box-shadow: 0 0 60px rgba(0, 255, 64, 0.3);
+    }
+
+    .shape:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      top: 50%;
+      right: 5%;
+      animation-delay: -5s;
+      animation-duration: 25s;
+      border: 2px solid rgba(0, 255, 136, 0.3);
+      background: radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, transparent 70%);
+    }
+
+    .shape:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      bottom: 10%;
+      left: 15%;
+      animation-delay: -10s;
+      animation-duration: 30s;
+      border: 2px solid rgba(0, 255, 64, 0.4);
+    }
+
+    .connection-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-primary), transparent);
+      transform-origin: left center;
+      animation: linePulse 5s infinite ease-in-out;
+      filter: drop-shadow(0 0 10px rgba(0, 255, 64, 0.5));
+    }
+
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--neon-primary);
+      border-radius: 50%;
+      filter: blur(0.5px);
+      box-shadow: 0 0 15px var(--neon-primary);
+      animation: particleFloat 12s infinite linear;
+      transform: translateZ(0);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(50px, -30px) rotate(120deg); }
+      66% { transform: translate(-30px, 40px) rotate(240deg); }
+    }
+
+    @keyframes linePulse {
+      0%, 100% { opacity: 0.5; transform: scaleX(1); }
+      50% { opacity: 1; transform: scaleX(1.3); }
+    }
+
+    @keyframes particleFloat {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-150px) translateX(80px); opacity: 0; }
+    }
+
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(0, 255, 64, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
+        linear-gradient(45deg, rgba(0, 0, 0, 0.7) 0%, rgba(10, 10, 10, 0.9) 100%);
+    }
+
+    .title-animation-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 3rem;
+      perspective: 1000px;
+    }
+
+    .title-animation {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 140%;
+      height: 140%;
+      z-index: -1;
+      overflow: visible;
+    }
+
+    .atom-nucleus {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, var(--neon-primary) 0%, var(--neon-secondary) 100%);
+      border-radius: 50%;
+      box-shadow:
+        0 0 30px var(--neon-primary),
+        0 0 60px rgba(0, 255, 64, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.8);
+      z-index: 10;
+      animation: nucleusPulse 3s infinite ease-in-out;
+    }
+
+    @keyframes nucleusPulse {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow:
+          0 0 30px var(--neon-primary),
+          0 0 60px rgba(0, 255, 64, 0.5),
+          inset 0 0 20px rgba(255, 255, 255, 0.8);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow:
+          0 0 40px var(--neon-primary),
+          0 0 80px rgba(0, 255, 64, 0.7),
+          inset 0 0 25px rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    .orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 2px solid;
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    .orbit-1 {
+      width: 120%;
+      height: 120%;
+      border-color: rgba(0, 255, 64, 0.4);
+      animation: orbitRotate1 8s linear infinite;
+    }
+
+    .orbit-2 {
+      width: 140%;
+      height: 140%;
+      border-color: rgba(0, 255, 136, 0.4);
+      animation: orbitRotate2 10s linear infinite reverse;
+    }
+
+    .orbit-3 {
+      width: 100%;
+      height: 100%;
+      border-color: rgba(0, 255, 64, 0.3);
+      animation: orbitRotate3 12s linear infinite;
+      transform: translate(-50%, -50%) rotateX(60deg);
+    }
+
+    .electron {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--neon-primary);
+      border-radius: 50%;
+      transform-origin: center center;
+      box-shadow:
+        0 0 15px var(--neon-primary),
+        0 0 30px rgba(0, 255, 64, 0.8);
+      z-index: 5;
+    }
+
+    .electron-1 { top: -8px; left: 50%; margin-left: -8px; animation: electronOrbit1 4s linear infinite; }
+    .electron-2 { bottom: -8px; left: 50%; margin-left: -8px; animation: electronOrbit2 4s linear infinite; }
+    .electron-3 { top: 50%; left: -8px; margin-top: -8px; animation: electronOrbit3 5s linear infinite; }
+    .electron-4 { top: 50%; right: -8px; margin-top: -8px; animation: electronOrbit4 5s linear infinite; }
+    .electron-5 { top: 20%; left: 20%; animation: electronOrbit5 6s linear infinite; }
+    .electron-6 { bottom: 20%; right: 20%; animation: electronOrbit6 6s linear infinite; }
+
+    @keyframes orbitRotate1 {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @keyframes orbitRotate2 {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(-360deg); }
+    }
+    @keyframes orbitRotate3 {
+      0% { transform: translate(-50%, -50%) rotateX(60deg) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotateX(60deg) rotate(360deg); }
+    }
+
+    .quantum-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--neon-primary);
+      border-radius: 50%;
+      filter: blur(1px);
+      box-shadow: 0 0 10px var(--neon-primary);
+      animation: quantumFloat 8s infinite linear;
+      opacity: 0.7;
+    }
+
+    @keyframes quantumFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+      25% { transform: translate(20px, -20px) scale(1.2); opacity: 1; }
+      50% { transform: translate(-15px, 15px) scale(0.8); opacity: 0.5; }
+      75% { transform: translate(-20px, -20px) scale(1.1); opacity: 0.9; }
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 4.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      line-height: 1.1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title span {
+      background: var(--gradient-neon);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+
+    .hero-title span::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon-primary), transparent);
+      opacity: 0.5;
+    }
+
+    .rotating-text-wrapper {
+      display: inline-block;
+      position: relative;
+      height: 90px;
+      perspective: 1000px;
+      vertical-align: top;
+      min-width: 250px;
+      margin-top: 1rem;
+    }
+
+    .rotating-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 1.5rem;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: rotateText 12s infinite;
+      background: var(--gradient-neon);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes rotateText {
+      0% { opacity: 0; transform: translateY(100%) rotateX(90deg); }
+      8% { opacity: 1; transform: translateY(0) rotateX(0deg); }
+      25% { opacity: 1; transform: translateY(0) rotateX(0deg); }
+      33% { opacity: 0; transform: translateY(-100%) rotateX(-90deg); }
+      100% { opacity: 0; transform: translateY(-100%) rotateX(-90deg); }
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      color: var(--light-2);
+      max-width: 600px;
+      margin: 2rem auto 4rem;
+      opacity: 0.8;
+      line-height: 1.8;
+      position: relative;
+      z-index: 2;
+    }
+
+    .linha-basica {
+      width: 100%;
+      height: 2px;
+      background-color: var(--gray-2);
+      margin: 2rem 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .start-button {
+      background: var(--gradient-neon);
+      color: #000;
+      padding: 1rem 3rem;
+      border-radius: var(--border-radius-xl);
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .start-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 255, 64, 0.3);
+    }
+
+    /* ========== ACADEMIAS DESTAQUES ========== */
+    .dois {
+      padding: 8rem 3rem;
+      background: var(--dark-0);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 6rem;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+      background: var(--gradient-neon);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--gradient-neon);
+      border-radius: 2px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .academy-card1 {
+      background: var(--dark-2);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      transition: all 0.5s var(--transition-smooth);
+      position: relative;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      will-change: transform;
+    }
+
+    .academy-card1:hover {
+      transform: translateY(-20px) rotateX(5deg) rotateY(5deg);
+      box-shadow: var(--shadow-heavy);
+      border-color: rgba(0, 255, 64, 0.3);
+    }
+
+    .card-image {
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+    }
+
+    .card-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .price-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--gradient-neon);
+      color: #000;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--border-radius-md);
+      font-weight: bold;
+      font-size: 1.1rem;
+      z-index: 10;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--neon-primary);
+    }
+
+    .card-content {
+      padding: 2.5rem;
+    }
+
+    .academy-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: var(--light-0);
+    }
+
+    .academy-type {
+      display: inline-block;
+      background: rgba(0, 255, 64, 0.1);
+      color: var(--neon-primary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius-xl);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .academy-location {
+      color: var(--gray-1);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .view-details-btn {
+      display: block;
+      width: 100%;
+      background: var(--gradient-neon);
+      color: #000;
+      border: none;
+      padding: 1rem;
+      border-radius: var(--border-radius-md);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .view-details-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 255, 64, 0.3);
+    }
+
+    /* ========== SEÇÃO PERSONAL TRAINERS ========== */
+    .quatro {
+      padding: 8rem 3rem;
+      background: var(--dark-1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .accent-bar {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 120px;
+      height: 500px;
+      background: var(--gradient-neon);
+      opacity: 0.1;
+      border-radius: 30px 0 0 30px;
+      z-index: 0;
+    }
+
+    .personal-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .personal-text {
+      padding-right: 20px;
+    }
+
+    .personal-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: var(--light-0);
+    }
+
+    .personal-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray-1);
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    .info-list {
+      list-style: none;
+      margin-bottom: 35px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 1rem;
+      color: var(--light-2);
+    }
+
+    .bullet {
+      width: 6px;
+      height: 6px;
+      background: var(--neon-secondary);
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .extra-info {
+      font-size: 0.95rem;
+      color: var(--neon-primary);
+      margin-bottom: 35px;
+      font-weight: 600;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: var(--border-radius-md);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+    }
+
+    .btn-download {
+      background: var(--gradient-neon);
+      color: #000;
+    }
+
+    .btn-download:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 255, 64, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--light-0);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--neon-primary);
+      color: var(--neon-primary);
+      transform: translateY(-3px);
+    }
+
+    /* ========== SEÇÃO GYM MARKET ========== */
+    .gym-market {
+      padding: 8rem 3rem;
+      background: var(--dark-2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .market-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .market-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .market-badge {
+      display: inline-block;
+      background: var(--gradient-neon);
+      color: #000;
+      padding: 0.8rem 2rem;
+      border-radius: var(--border-radius-xl);
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 8px 25px rgba(0, 255, 64, 0.4);
+      animation: badgePulse 2s infinite alternate;
+    }
+
+    @keyframes badgePulse {
+      0% { transform: scale(1); box-shadow: 0 8px 25px rgba(0, 255, 64, 0.4); }
+      100% { transform: scale(1.05); box-shadow: 0 12px 35px rgba(0, 255, 64, 0.6); }
+    }
+
+    .market-title {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--light-0);
+    }
+
+    .market-title span {
+      background: var(--gradient-neon);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+
+    .market-subtitle {
+      font-size: 1.2rem;
+      color: var(--light-2);
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+
+    .market-card {
+      background: var(--dark-1);
+      border-radius: var(--border-radius-lg);
+      padding: 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      will-change: transform;
+    }
+
+    .market-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--neon-primary);
+      box-shadow: 0 20px 60px rgba(0, 255, 64, 0.2);
+    }
+
+    .market-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-neon);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .market-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-neon);
+      border-radius: var(--border-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: #000;
+      font-size: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--light-0);
+    }
+
+    .card-description {
+      font-size: 1rem;
+      color: var(--light-2);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+    }
+
+    .card-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .card-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+      color: var(--light-1);
+    }
+
+    .feature-check {
+      color: var(--neon-primary);
+      font-size: 0.8rem;
+    }
+
+    .market-cta-section {
+      background: var(--dark-3);
+      border-radius: var(--border-radius-lg);
+      padding: 3rem;
+      text-align: center;
+      border: 2px solid rgba(0, 255, 64, 0.2);
+      margin-top: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--light-0);
+    }
+
+    .cta-description {
+      font-size: 1.1rem;
+      color: var(--light-2);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .market-cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .market-btn {
+      padding: 1rem 2.5rem;
+      background: var(--gradient-neon);
+      color: #000;
+      border: none;
+      border-radius: var(--border-radius-xl);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 25px rgba(0, 255, 64, 0.3);
+    }
+
+    .market-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 255, 64, 0.4);
+    }
+
+    .market-btn.secondary {
+      background: transparent;
+      color: var(--light-0);
+      border: 2px solid rgba(0, 255, 64, 0.3);
+    }
+
+    .market-btn.secondary:hover {
+      background: rgba(0, 255, 64, 0.1);
+      border-color: var(--neon-primary);
+    }
+
+    .discount-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--gradient-neon);
+      color: #000;
+      padding: 0.5rem 1.5rem;
+      border-radius: var(--border-radius-xl);
+      font-weight: 800;
+      font-size: 1.2rem;
+      transform: rotate(10deg);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ========== PHONES MOCKUP ========== */
+    .phones-mockup {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .phone {
+      width: 240px;
+      height: 490px;
+      background: var(--dark-3);
+      border-radius: 30px;
+      padding: 12px;
+      box-shadow: var(--shadow-heavy);
+      border: 6px solid var(--gray-2);
+      position: relative;
+    }
+
+    .phone.phone-1 {
+      transform: translateY(-20px);
+      animation: phoneFloat1 6s ease-in-out infinite;
+    }
+
+    .phone.phone-2 {
+      transform: translateY(20px);
+      animation: phoneFloat2 6s ease-in-out infinite 1s;
+    }
+
+    @keyframes phoneFloat1 {
+      0%, 100% { transform: translateY(-20px) rotate(-2deg); }
+      50% { transform: translateY(-40px) rotate(2deg); }
+    }
+
+    @keyframes phoneFloat2 {
+      0%, 100% { transform: translateY(20px) rotate(2deg); }
+      50% { transform: translateY(0) rotate(-2deg); }
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--dark-2) 0%, var(--dark-0) 100%);
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(0, 255, 64, 0.2);
+    }
+
+    .notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 25px;
+      background: var(--dark-0);
+      border-radius: 0 0 15px 15px;
+      z-index: 10;
+      border-bottom: 2px solid rgba(0, 255, 64, 0.3);
+    }
+
+    .screen-content {
+      padding: 40px 15px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 100%;
+    }
+
+    .screen-header {
+      background: rgba(0, 255, 136, 0.15);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: var(--border-radius-md);
+      padding: 15px 10px;
+      text-align: center;
+    }
+
+    .screen-header h4 {
+      font-size: 0.9rem;
+      color: var(--neon-secondary);
+      margin-bottom: 5px;
+    }
+
+    .screen-header p {
+      font-size: 0.75rem;
+      color: var(--gray-1);
+    }
+
+    .screen-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius-sm);
+      padding: 12px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 45px;
+      transition: all 0.3s ease;
+    }
+
+    .screen-card:hover {
+      background: rgba(0, 255, 64, 0.1);
+      border-color: rgba(0, 255, 64, 0.3);
+    }
+
+    .card-info {
+      font-size: 0.75rem;
+      color: var(--gray-1);
+    }
+
+    .card-value {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--neon-secondary);
+    }
+
+    /* ========== FOOTER ========== */
+    .academia-footer {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 60px;
+    }
+
+    .academia-background svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 0;
+    }
+
+    .academia-footer-inner {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 2rem 8rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    .academia-footer-inner .academia-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .academia-footer-inner .academia-top h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--light-0);
+    }
+
+    .academia-footer-inner .academia-top h3 {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--gray-1);
+    }
+
+    .academia-footer-inner .academia-bottom {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .academia-logo-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .academia-socials {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .academia-socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      font-size: 1.25rem;
+      color: var(--light-0);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .academia-socials a:hover {
+      background: rgba(0, 255, 136, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .academia-nav {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .academia-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .academia-nav h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--gray-1);
+    }
+
+    .academia-nav a {
+      font-size: 0.9rem;
+      color: var(--light-0);
+      opacity: 0.8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .academia-nav a:hover {
+      opacity: 1;
+      color: var(--neon-secondary);
+      transform: translateX(5px);
+    }
+
+    /* ========== RESULTADOS DA PESQUISA ========== */
+    .search-results {
+      position: fixed;
+      top: calc(1.2rem * 2 + 55px + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      border-radius: 15px;
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+      z-index: 1999;
+      width: calc(100vw - 40px);
+      max-width: 600px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .search-results.active {
+      display: block;
+    }
+
+    .search-result-item {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-result-item:hover {
+      background: #f0f0f0;
+    }
+
+    .result-category {
+      font-size: 0.8rem;
+      color: var(--neon-primary);
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .result-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .result-description {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* ========== NOTIFICAÇÕES ========== */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 255, 64, 0.95);
+      color: #000;
+      padding: 16px 24px;
+      border-radius: 16px;
+      font-weight: 700;
+      z-index: 10000;
+      box-shadow: 0 10px 40px rgba(0, 255, 64, 0.4);
+      backdrop-filter: blur(20px);
+      animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOutUp {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-20px); }
+    }
+
+    /* ========== ANIMAÇÕES DE SCROLL ========== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s var(--transition-smooth);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== RESPONSIVIDADE ========== */
+    @media (max-width: 1024px) {
+      .header-container { padding: 1rem 1.5rem; }
+      .logo-img { height: 65px; }
+      .right-controls { gap: 1rem; }
+      .gym-access-btn { padding: 10px 16px; font-size: 0.95rem; }
+      .search-toggle-btn { width: 44px; height: 44px; }
+      .search-icon { width: 20px; height: 20px; }
+      .expandable-search-field { width: 44px; height: 44px; }
+      .expandable-search-field.expanded { width: 280px; }
+      .slide-menu { width: 350px; right: -350px; padding: 2rem 1.5rem; }
+      .hero-title { font-size: 3.5rem; }
+      .personal-wrapper { grid-template-columns: 1fr; gap: 50px; text-align: center; }
+      .personal-text { padding-right: 0; }
+      .market-title { font-size: 2.5rem; }
+      .phones-mockup { justify-content: center; }
+      .accent-bar { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .header-container { padding: 0.8rem 1rem; }
+      .logo-img { height: 50px; }
+      .right-controls { gap: 0.5rem; }
+      .gym-access-btn { padding: 8px 12px; font-size: 0.9rem; }
+      .search-toggle-btn { width: 42px; height: 42px; }
+      .expandable-search-field.expanded { width: 250px; }
+      .slide-menu { width: 300px; right: -300px; padding: 1.5rem 1.2rem; }
+      .hero { padding: 0 1.5rem; padding-top: 100px; }
+      .hero-title { font-size: 2.5rem; }
+      .rotating-text-wrapper { height: 50px; min-width: 200px; }
+      .rotating-text { font-size: 1.8rem; }
+      .section-title { font-size: 2.2rem; }
+      .market-title { font-size: 2.2rem; }
+      .cards { grid-template-columns: 1fr; }
+      .academia-nav { flex-direction: column; gap: 2rem; }
+      .market-cta-buttons { flex-direction: column; align-items: center; gap: 15px; }
+      .market-grid { grid-template-columns: 1fr; }
+      .title-animation { width: 120%; height: 130%; }
+    }
+
+    @media (max-width: 480px) {
+      .header-container { padding: 0.6rem; }
+      .logo-img { height: 40px; }
+      .gym-access-btn { padding: 6px 10px; font-size: 0.7rem; }
+      .search-toggle-btn { width: 36px; height: 36px; }
+      .expandable-search-field.expanded { width: 200px; }
+      .hero-title { font-size: 2rem; }
+      .rotating-text-wrapper { height: 35px; min-width: 150px; }
+      .rotating-text { font-size: 1.2rem; }
+      .section-title { font-size: 1.8rem; }
+      .personal-title { font-size: 1.8rem; }
+      .market-title { font-size: 1.8rem; }
+      .phones-mockup { flex-direction: column; gap: 15px; }
+      .phone { width: 180px; height: 370px; }
+      .cta-buttons { flex-direction: column; }
+      .market-cta-section { padding: 2rem 1.5rem; }
+      .cta-title { font-size: 1.5rem; }
+      .title-animation { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ========== HEADER COM ACESSIBILIDADE ========== -->
+  <header class="header-container" id="menu" role="banner" aria-label="Cabeçalho principal">
+    <div class="nav-wrapper">
+      <div class="brand-container">
+        <a href="#" aria-label="Página inicial Gym P2">
+          <img src="logo.png" alt="Logo Gym P2 - Fitness e Bem-Estar" class="logo-img">
+        </a>
+      </div>
+      <div class="right-controls">
+        <!-- Barra de Pesquisa -->
+        <div class="search-widget" id="searchWidget">
+          <div class="expandable-search-field" id="searchField">
+            <input type="text" class="search-input-field" placeholder="Digite sua pesquisa..." id="searchInput" aria-label="Campo de pesquisa">
+          </div>
+          <button class="search-toggle-btn" id="searchToggle" aria-label="Abrir pesquisa">
+            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
             </svg>
+          </button>
+          <div class="search-results" id="searchResults" role="listbox" aria-label="Resultados da pesquisa"></div>
         </div>
-        <div class="academia-footer-inner">
-            <div class="academia-top">
-                <div>
-                    <h2>VOCÊ ESTÁ PRONTO PARA TRANSFORMAR SEU CORPO E SUA VIDA?</h2>
-                    <h3>Encontre as melhores academias, dicas e uma comunidade que te impulsiona!</h3>
-                </div>
-            </div>
-            <div class="academia-bottom">
-                <div class="academia-logo-content">
-                    <div class="academia-socials">
-                        <a href="https://www.instagram.com/gymp2_portal/" class="instagram" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                <nav class="academia-nav">
-                    <ul>
-                        <li><h4>SOBRE O GYM P2</h4></li>
-                        <li><a href="#">Quem Somos</a></li>
-                        <li><a href="#">Nossa Missão</a></li>
-                        <li><a href="#">Contatos</a></li>
-                    </ul>
-                    <ul>
-                        <li><h4>EXPLORE</h4></li>
-                        <li><a href="#">Academias</a></li>
-                        <li><a href="#">Artes Marciais</a></li>
-                        <li><a href="#">Blog e Dicas</a></li>
-                    </ul>
-                    <ul>
-                        <li><h4>CONECTE-SE</h4></li>
-                        <li><a href="#">Siga-nos nas Redes Sociais</a></li>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">Termos de Uso</a></li>
-                    </ul>
-                </nav>
-            </div>
+
+        <!-- Botões de Navegação -->
+        <a href="index.html"><button class="gym-access-btn home-btn" aria-label="Ir para página inicial"><i class="fas fa-home"></i> Home</button></a>
+        <a href="academias-publicas.html"><button class="gym-access-btn" aria-label="Ver academias"><i class="fas fa-dumbbell"></i> Academias</button></a>
+        <a href="login-gym.html"><button class="gym-access-btn" id="loginBtn" aria-label="Fazer login"><i class="fas fa-sign-in-alt"></i> Login</button></a>
+
+        <!-- Menu Hamburguer -->
+        <button class="menu-trigger" id="menuTrigger" aria-label="Abrir menu" aria-expanded="false" aria-controls="slideMenu">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== MENU SLIDE ========== -->
+  <nav class="slide-menu" id="slideMenu" role="navigation" aria-label="Menu principal">
+    <div class="menu-header">
+      <button class="menu-close-btn" id="menuCloseBtn" aria-label="Fechar menu">
+        <svg class="menu-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Botão de Busca no Menu -->
+    <a href="academias-publicas.html">
+      <button class="menu-search-btn" aria-label="Buscar academias">
+        <i class="fas fa-search"></i> Academias
+      </button>
+    </a>
+
+    <!-- Lista de Navegação -->
+    <ul class="navigation-list" role="menu">
+      <li class="nav-item" role="none"><a href="index.html" class="nav-link" role="menuitem"><i class="fas fa-home"></i> Home</a></li>
+      <li class="nav-item" role="none"><a href="login-gym.html" class="nav-link" role="menuitem"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+      <li class="nav-item" role="none"><a href="Filtro_personal.html" class="nav-link" role="menuitem"><i class="fas fa-percent"></i> Promoções</a></li>
+      <li class="nav-item" role="none"><a href="#news" class="nav-link" role="menuitem"><i class="fas fa-gift"></i> Sorteios</a></li>
+      <li class="nav-item" role="none"><a href="config.html" class="nav-link" role="menuitem"><i class="fas fa-cog"></i> Configurações</a></li>
+      <li class="nav-item" role="none"><a href="Sobre_nós.html" class="nav-link" role="menuitem"><i class="fas fa-info-circle"></i> Sobre nós</a></li>
+    </ul>
+  </nav>
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <!-- ========== HERO SECTION ========== -->
+  <main class="hero" role="main">
+    <!-- Parallax Background -->
+    <div class="parallax-container" id="parallaxContainer" aria-hidden="true">
+      <div class="parallax-layer layer-1">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="connection-line"></div>
+        <div class="connection-line"></div>
+      </div>
+      <div class="parallax-layer layer-2">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="connection-line"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+      <div class="parallax-layer layer-3">
+        <div class="shape"></div>
+        <div class="connection-line"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+    </div>
+
+    <!-- Gradiente de fundo -->
+    <div class="hero-background" aria-hidden="true"></div>
+
+    <div class="hero-content fade-in">
+      <!-- Container com animação de átomo -->
+      <div class="title-animation-container">
+        <div class="title-animation" aria-hidden="true">
+          <!-- Núcleo do átomo -->
+          <div class="atom-nucleus"></div>
+
+          <!-- Órbitas -->
+          <div class="orbit orbit-1"></div>
+          <div class="orbit orbit-2"></div>
+          <div class="orbit orbit-3"></div>
+
+          <!-- Elétrons -->
+          <div class="electron electron-1"></div>
+          <div class="electron electron-2"></div>
+          <div class="electron electron-3"></div>
+          <div class="electron electron-4"></div>
+          <div class="electron electron-5"></div>
+          <div class="electron electron-6"></div>
+
+          <!-- Partículas quânticas -->
+          <div class="quantum-particle"></div>
+          <div class="quantum-particle"></div>
+          <div class="quantum-particle"></div>
+          <div class="quantum-particle"></div>
         </div>
-    </footer>
-    <script src="menu.js"></script>
-    <!-- 1. Sistema de Notificações Globais -->
-    <script src="global-notifications.js"></script>
-    <!-- 2. Gerenciador de Usuários -->
-    <script src="user-manager.js"></script>
-    <!-- 3. Header com Informações do Usuário -->
-    <script src="user-header.js"></script>
-    <script>   
-   
-// ========== VERIFICAÇÃO SEGURA DE LOGIN ==========
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔐 Verificando autenticação...');
-    
-    // Verificar se veio diretamente do login (evitar loop)
-    const justLoggedIn = sessionStorage.getItem('justLoggedIn');
-    const loginTimestamp = sessionStorage.getItem('loginTimestamp');
-    const currentTime = Date.now();
-    
-    // Se acabou de fazer login (nos últimos 3 segundos), permitir acesso
-    if (justLoggedIn && loginTimestamp && (currentTime - loginTimestamp < 3000)) {
-        console.log('✅ Login recente detectado, permitindo acesso...');
-        
-        // Limpar flag após 5 segundos
-        setTimeout(() => {
-            sessionStorage.removeItem('justLoggedIn');
-            sessionStorage.removeItem('loginTimestamp');
-        }, 5000);
-        
-        // Iniciar o sistema normalmente
-        setTimeout(initLoginSystem, 100);
-        return;
-    }
-    
-   
-});
 
-// ========== SISTEMA DE LOGIN (MANTER O RESTANTE DO SEU CÓDIGO) ==========
-function initLoginSystem() {
-    console.log('🔧 Iniciando sistema de login...');
-    
-    const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
-    
-    if (userData) {
-        try {
-            const user = JSON.parse(userData);
-            console.log('👤 Usuário logado detectado:', user.name);
-            updateUIForLoggedUser(user);
-        } catch (error) {
-            console.error('❌ Erro ao processar usuário:', error);
-        }
-    } else {
-        console.log('ℹ️ Nenhum usuário logado');
-        resetUIForLoggedOut();
-    }
-}
+        <h1 class="hero-title">
+          Bem vindo ao Gym P2, aqui você encontra:
+          <div class="rotating-text-wrapper">
+            <div class="rotating-text">Academias</div>
+            <div class="rotating-text">Artes Marciais</div>
+            <div class="rotating-text">Blogs e dicas</div>
+            <div class="rotating-text">Sorteios</div>
+          </div>
+        </h1>
+      </div>
 
-    
-    // Atualizar informações do usuário no header
-    function updateHeaderUserInfo(user) {
-        // Nome no botão do header
-        const userNameHeader = document.getElementById('userNameHeader');
-        const dropdownUserName = document.getElementById('dropdownUserName');
-        const dropdownUserEmail = document.getElementById('dropdownUserEmail');
-        const userAvatar = document.getElementById('userAvatar');
-        
-        if (userNameHeader) userNameHeader.textContent = user.name || 'Usuário';
-        if (dropdownUserName) dropdownUserName.textContent = user.name || 'Usuário';
-        if (dropdownUserEmail) dropdownUserEmail.textContent = user.email || 'email@exemplo.com';
-        
-        // Atualizar avatar com iniciais
-        if (userAvatar && user.name) {
-            const initials = getInitials(user.name);
-            userAvatar.textContent = initials;
-        }
+      <div class="linha-basica" aria-hidden="true"></div>
+
+      <p class="hero-description">
+        <span class="sentence-1">O site Gym P2 foi criado com o objetivo de facilitar o acesso da comunidade local a
+          informações sobre saúde, bem-estar e atividades físicas e também para ajudar a população da cidade de Pedro
+          II.</span>
+        <span class="sentence-2">A iniciativa busca aproximar a academia dos moradores, oferecendo um espaço digital
+          onde é possível conhecer os serviços disponíveis, os horários de funcionamento, planos de treinamento, eventos
+          e até dicas de exercícios e nutrição.</span>
+        <span class="sentence-3">Além disso, a presença online fortalece a divulgação das academias e ajuda a população
+          da cidade em questão de achar qual a academia mais próxima e custo benefício para você treinar!</span>
+      </p>
+
+      <a href="Sobre_nós.html">
+        <button class="start-button" aria-label="Saiba mais sobre o Gym P2">
+          <i class="fas fa-info-circle"></i> Sobre nós
+        </button>
+      </a>
+    </div>
+  </main>
+
+  <!-- ========== ACADEMIAS DESTAQUES ========== -->
+  <section class="dois" aria-labelledby="destaques-title">
+    <div class="section-header fade-in">
+      <h1 class="section-title" id="destaques-title">Academias Destaque</h1>
+    </div>
+
+    <div class="cards">
+      <!-- Card Opala Fitness -->
+      <article class="academy-card1 fade-in" data-type="musculacao" data-location="centro" data-price="60">
+        <div class="price-badge">R$ 80/mês</div>
+        <div class="card-image">
+          <picture>
+            <source srcset="Opala-Fitness-small.webp" type="image/webp">
+            <source srcset="Opala-Fitness-small.jpg" type="image/jpeg">
+            <img src="Opala-Fitness.png" alt="Academia Opala Fitness - interior moderno com equipamentos" loading="lazy">
+          </picture>
+        </div>
+        <div class="card-content">
+          <h3 class="academy-name">Opala-Fitness</h3>
+          <span class="academy-type">Tipo: Musculação</span>
+          <div class="academy-location">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            RUA: CORINTO ANDRADE N° 143 - CENTRO PEDRO II - PI, em frente conselho do tutelar
+          </div>
+          <div class="schedule-section">
+            <div class="schedule">
+              <div class="schedule-line"><strong>Seg a Sex:</strong> 5:00h às 21:00h</div>
+              <div class="schedule-line"><strong>Sáb/Feriados:</strong> 7:00 h às 16:00 h</div>
+            </div>
+          </div>
+          <a href="Opala-Fitness.html" class="view-details-btn" aria-label="Ver detalhes da Opala Fitness">Ver Detalhes</a>
+        </div>
+      </article>
+
+      <!-- Card Rede Fit -->
+      <article class="academy-card1 fade-in" data-type="musculacao" data-location="centro" data-price="60">
+        <div class="price-badge">R$ 80/mês</div>
+        <div class="card-image">
+          <picture>
+            <source srcset="RedeFit-small.webp" type="image/webp">
+            <source srcset="RedeFit-small.jpg" type="image/jpeg">
+            <img src="RedeFit.png" alt="Academia Rede Fit - equipamentos profissionais" loading="lazy">
+          </picture>
+        </div>
+        <div class="card-content">
+          <h3 class="academy-name">Rede-Fit</h3>
+          <span class="academy-type">Tipo: Musculação</span>
+          <div class="academy-location">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            Av. Cel. Cordeiro, 739, Pedro II - PI, 64255-000
+          </div>
+          <div class="schedule-section">
+            <div class="schedule">
+              <div class="schedule-line"><strong>Seg a Sex:</strong> 6h - 22h</div>
+              <div class="schedule-line"><strong>Sáb/Feriados:</strong> 7h - 15h</div>
+            </div>
+          </div>
+          <a href="Redefit.html" class="view-details-btn" aria-label="Ver detalhes da Rede Fit">Ver Detalhes</a>
+        </div>
+      </article>
+
+      <!-- Card Vila Fitness -->
+      <article class="academy-card1 fade-in" data-type="musculacao" data-location="centro" data-price="60">
+        <div class="price-badge">R$ 70/mês</div>
+        <div class="card-image">
+          <picture>
+            <source srcset="vilafitness_fachada-small.webp" type="image/webp">
+            <source srcset="vilafitness_fachada-small.jpg" type="image/jpeg">
+            <img src="vilafitness_fachada.png" alt="Fachada da Vila Fitness" loading="lazy">
+          </picture>
+        </div>
+        <div class="card-content">
+          <h3 class="academy-name">Vila-Fitness</h3>
+          <span class="academy-type">Tipo: Musculação</span>
+          <div class="academy-location">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            R. Raimundo nonato Brandão 776 - Vila Pedro II - PI, 64255-000
+          </div>
+          <div class="schedule-section">
+            <div class="schedule">
+              <div class="schedule-line"><strong>Seg a Sex:</strong> 5h - 22h</div>
+              <div class="schedule-line"><strong>Sáb/Feriados:</strong> 8h - 14h</div>
+            </div>
+          </div>
+          <a href="vilafitness.html" class="view-details-btn" aria-label="Ver detalhes da Vila Fitness">Ver Detalhes</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== PERSONAL TRAINERS SECTION ========== -->
+  <section class="quatro" aria-labelledby="personal-title">
+    <div class="accent-bar" aria-hidden="true"></div>
+    <div class="personal-wrapper">
+      <!-- Lado Esquerdo -->
+      <div class="personal-text fade-in">
+        <h1 class="personal-title" id="personal-title">
+          Personal Trainers:<br>
+          Seu parceiro nos treinos!
+        </h1>
+
+        <p class="personal-subtitle">
+          Conecte-se com profissionais qualificados e alcance seus objetivos
+        </p>
+
+        <ul class="info-list">
+          <li class="info-item">
+            <span class="bullet" aria-hidden="true"></span>
+            <span>Encontre personal trainers próximos a você</span>
+          </li>
+          <li class="info-item">
+            <span class="bullet" aria-hidden="true"></span>
+            <span>Veja avaliações e especialidades</span>
+          </li>
+          <li class="info-item">
+            <span class="bullet" aria-hidden="true"></span>
+            <span>Agende sua primeira sessão gratuita</span>
+          </li>
+          <li class="info-item">
+            <span class="bullet" aria-hidden="true"></span>
+            <span>Profissionais certificados e experientes</span>
+          </li>
+        </ul>
+
+        <p class="extra-info">
+          Tudo isso de graça!
+        </p>
+
+        <div class="cta-buttons">
+          <a href="Filtro_personal.html" class="btn btn-download" aria-label="Encontrar personal trainers">
+            <i class="fas fa-search"></i>
+            Encontrar Personal
+          </a>
+
+          <a href="Cadastrar_personal.html" class="btn btn-secondary" aria-label="Cadastrar-se como personal trainer">
+            <i class="fas fa-user-plus"></i>
+            Cadastre-se
+          </a>
+        </div>
+      </div>
+
+      <!-- Lado Direito - Mockups -->
+      <div class="phones-mockup fade-in" aria-hidden="true">
+        <div class="phone phone-1">
+          <div class="phone-screen">
+            <div class="notch"></div>
+            <div class="screen-content">
+              <div class="screen-header">
+                <h4>Personal Trainers</h4>
+                <p>Encontre o seu</p>
+              </div>
+              <div class="screen-card">
+                <span class="card-info">Profissionais</span>
+                <span class="card-value">150+</span>
+              </div>
+              <div class="screen-card">
+                <span class="card-info">Avaliação</span>
+                <span class="card-value">5.0 ★</span>
+              </div>
+              <div class="screen-card">
+                <span class="card-info">Alunos</span>
+                <span class="card-value">2.5K</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone phone-2">
+          <div class="phone-screen">
+            <div class="notch"></div>
+            <div class="screen-content">
+              <div class="screen-header">
+                <h4>Seus Treinos</h4>
+                <p>Acompanhamento</p>
+              </div>
+              <div class="screen-card">
+                <span class="card-info">Treinos/Mês</span>
+                <span class="card-value">16</span>
+              </div>
+              <div class="screen-card">
+                <span class="card-info">Progresso</span>
+                <span class="card-value">85%</span>
+              </div>
+              <div class="screen-card">
+                <span class="card-info">Meta</span>
+                <span class="card-value">4/4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SEÇÃO GYM MARKET ========== -->
+  <section class="gym-market" id="gymMarket" aria-labelledby="market-title">
+    <div class="market-wrapper">
+      <div class="market-header fade-in">
+        <div class="market-badge">🌿 Gym Market - Novo!</div>
+        <h2 class="market-title" id="market-title">
+          Conheça o <span>Gym Market</span> - Sua Loja Fitness Completa
+        </h2>
+        <p class="market-subtitle">
+          O mais novo membro da família Gym P2! Tudo que você precisa para potencializar seus resultados
+        </p>
+      </div>
+
+      <div class="market-grid fade-in">
+        <!-- Card 1 -->
+        <article class="market-card">
+          <div class="card-icon" aria-hidden="true">
+            <i class="fas fa-capsules"></i>
+          </div>
+          <h3 class="card-title">Suplementos Premium</h3>
+          <p class="card-description">
+            Whey Protein, Creatina, BCAA, Pré-treinos e muito mais das melhores marcas.
+          </p>
+          <ul class="card-features">
+            <li class="card-feature">
+              <i class="fas fa-check feature-check" aria-hidden="true"></i>
+              <span>Produtos importados e nacionais</span>
+            </li>
+            <li class="card-feature">
+              <i class="fas fa-check feature-check" aria-hidden="true"></i>
+              <span>Garantia de autenticidade</span>
+            </li>
+            <li class="card-feature">
+              <i class="fas fa-check feature-check" aria-hidden="true"></i>
+              <span>Melhores preços da região</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="market-card">
+          <div class="card-icon" aria-hidden="true">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <h3 class="card-title">Equipamentos</h3>
+          <p class="card-description">
+            Halteres, barras, anilhas, luvas e acessórios para seu treino em casa ou academia.
+          </p>
+          <ul class="card-features">
+            <li class="card-feature">
+              <i class="fas fa-check feature-check" aria-hidden="true"></i>
+              <span>Alta durabilidade</span>
+            </li>
+            <li class="card-feature">
+              <i class="fas fa-check feature-check" aria-hidden="true"></i>
+              <span>Entrega rápida</span>
+            </li>
+            <li class="card-feature">
+              <i class="fas fa-check feature-check" aria-hidden="true"></i>
+              <span>Instalação gratuita</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="market-card">
+          <div class="card-icon" aria-hidden="true">
+            <i class="fas fa-tshirt"></i>
+          </div>
+          <h3 class="card-title">Vestuário Fitness</h3>
+          <p class="card-description">
+            Roupas e calçados esportivos das marcas mais famosas com desconto especial.
+          </p>
+          <ul class="card-features">
+            <li class="card-feature">
+              <i class="fas fa-check feature-check" aria-hidden="true"></i>
+              <span>Tecnologia dry-fit</span>
+            </li>
+            <li class="card-feature">
+              <i class="fas fa-check feature-check" aria-hidden="true"></i>
+              <span>Conforto e estilo</span>
+            </li>
+            <li class="card-feature">
+              <i class="fas fa-check feature-check" aria-hidden="true"></i>
+              <span>Trocas facilitadas</span>
+            </li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="market-cta-section fade-in">
+        <div class="discount-badge" aria-hidden="true">-15%</div>
+        <h3 class="cta-title">Pronto para Transformar Seus Treinos?</h3>
+        <p class="cta-description">
+          Como usuário do Gym P2, você tem <strong>15% de desconto</strong> na primeira compra no Gym Market!
+          Aproveite preços especiais e qualidade garantida.
+        </p>
+        <div class="market-cta-buttons">
+          <a href="#" class="market-btn" aria-label="Visitar Gym Market">
+            <i class="fas fa-shopping-cart"></i>
+            Visitar Gym Market
+          </a>
+          <a href="#" class="market-btn secondary" aria-label="Ver promoções do Gym Market">
+            <i class="fas fa-percent"></i>
+            Ver Promoções
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="academia-footer" role="contentinfo">
+    <div class="academia-background" aria-hidden="true">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        width="100%" height="100%" viewBox="0 0 1600 900">
+        <defs>
+          <path id="wave" fill="#00ff404D"
+            d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
+                    s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z" />
+        </defs>
+        <g>
+          <use xlink:href="#wave" opacity=".4">
+            <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="8s" calcMode="spline"
+              values="270 230; -334 180; 270 230" keyTimes="0; .5; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+              repeatCount="indefinite" />
+          </use>
+          <use xlink:href="#wave" opacity=".6">
+            <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="6s" calcMode="spline"
+              values="-270 230;243 220;-270 230" keyTimes="0; .6; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+              repeatCount="indefinite" />
+          </use>
+          <use xlink:href="#wave" opacty=".9">
+            <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="4s" calcMode="spline"
+              values="0 230;-140 200;0 230" keyTimes="0; .4; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+              repeatCount="indefinite" />
+          </use>
+        </g>
+      </svg>
+    </div>
+    <div class="academia-footer-inner">
+      <div class="academia-top">
+        <div>
+          <h2>VOCÊ ESTÁ PRONTO PARA TRANSFORMAR SEU CORPO E SUA VIDA?</h2>
+          <h3>Encontre as melhores academias, dicas e uma comunidade que te impulsiona!</h3>
+        </div>
+      </div>
+      <div class="academia-bottom">
+        <div class="academia-logo-content">
+          <div class="academia-socials">
+            <a href="https://www.instagram.com/gymp2_portal/" class="instagram" title="Instagram Gym P2" aria-label="Instagram Gym P2">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        <nav class="academia-nav" aria-label="Links do rodapé">
+          <ul>
+            <li>
+              <h4>SOBRE O GYM P2</h4>
+            </li>
+            <li><a href="Sobre_nós.html">Quem Somos</a></li>
+            <li><a href="Sobre_nós.html">Nossa Missão</a></li>
+            <li><a href="config.html">Contatos</a></li>
+          </ul>
+          <ul>
+            <li>
+              <h4>EXPLORE</h4>
+            </li>
+            <li><a href="academias-publicas.html">Academias</a></li>
+            <li><a href="#artes-marciais">Artes Marciais</a></li>
+            <li><a href="#blog">Blog e Dicas</a></li>
+          </ul>
+          <ul>
+            <li>
+              <h4>CONECTE-SE</h4>
+            </li>
+            <li><a href="https://www.instagram.com/gymp2_portal/">Siga-nos nas Redes Sociais</a></li>
+            <li><a href="#politica-privacidade">Política de Privacidade</a></li>
+            <li><a href="#termos-uso">Termos de Uso</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SERVICE WORKER EM-LINE ========== -->
+  <script id="service-worker" type="text/javascript">
+    // Service Worker inline
+    if ('serviceWorker' in navigator) {
+      const swScript = `
+        const CACHE_NAME = 'gym-p2-v1';
+        const urlsToCache = [
+          '/',
+          '/index.html',
+          '/logo.png',
+          '/Opala-Fitness-small.webp',
+          '/RedeFit-small.webp',
+          '/vilafitness_fachada-small.webp'
+        ];
+
+        self.addEventListener('install', event => {
+          event.waitUntil(
+            caches.open(CACHE_NAME)
+              .then(cache => cache.addAll(urlsToCache))
+          );
+        });
+
+        self.addEventListener('fetch', event => {
+          event.respondWith(
+            caches.match(event.request)
+              .then(response => response || fetch(event.request))
+          );
+        });
+      `;
+      
+      const blob = new Blob([swScript], { type: 'application/javascript' });
+      const swURL = URL.createObjectURL(blob);
+      
+      navigator.serviceWorker.register(swURL).catch(console.error);
     }
-    
-    // Função para obter iniciais do nome
-    function getInitials(name) {
-        if (!name) return 'U';
-        return name
-            .split(' ')
-            .map(n => n[0])
-            .slice(0, 2)
-            .join('')
-            .toUpperCase();
+  </script>
+
+  <!-- ========== SCRIPTS OTIMIZADOS ========== -->
+  <script>
+    // ========== DEBOUNCE FUNCTION ==========
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
     }
-    
-    // Sistema de dropdown do usuário
-    document.addEventListener('DOMContentLoaded', function() {
-        const userHeaderContainer = document.getElementById('userHeaderContainer');
-        const userDropdown = document.getElementById('userDropdown');
-        
-        if (userHeaderContainer && userDropdown) {
-            userHeaderContainer.addEventListener('click', function() {
-                userDropdown.style.opacity = userDropdown.style.opacity === '1' ? '0' : '1';
-                userDropdown.style.visibility = userDropdown.style.visibility === 'visible' ? 'hidden' : 'visible';
-                userDropdown.style.transform = userDropdown.style.transform === 'translateY(0px)' ? 'translateY(-10px)' : 'translateY(0px)';
-            });
-            
-            // Fechar dropdown ao clicar fora
-            document.addEventListener('click', function(event) {
-                if (!userHeaderContainer.contains(event.target)) {
-                    userDropdown.style.opacity = '0';
-                    userDropdown.style.visibility = 'hidden';
-                    userDropdown.style.transform = 'translateY(-10px)';
-                }
-            });
+
+    // ========== CACHE SYSTEM ==========
+    const cache = {
+      data: {},
+      set(key, value, ttl = 300000) { // 5 minutos default
+        this.data[key] = {
+          value,
+          expiry: Date.now() + ttl
+        };
+      },
+      get(key) {
+        const item = this.data[key];
+        if (!item) return null;
+        if (Date.now() > item.expiry) {
+          delete this.data[key];
+          return null;
         }
+        return item.value;
+      }
+    };
+
+    // ========== ERROR HANDLING ==========
+    window.addEventListener('error', function(e) {
+      console.error('Erro global:', e.error);
+      showNotification('Ocorreu um erro inesperado. Tente novamente.', 'error');
     });
-    
-    // Função de logout
-    function logout() {
-        if (confirm('Tem certeza que deseja sair da sua conta?')) {
-            // Limpar dados do usuário
-            localStorage.removeItem('currentUser');
-            localStorage.removeItem('gymp2_current_user');
-            sessionStorage.removeItem('gymp2_user');
-            
-            // Redirecionar para página inicial
-            window.location.href = 'index.html';
+
+    // ========== EFEITO PARALLAX OTIMIZADO ==========
+    const parallaxContainer = document.getElementById('parallaxContainer');
+
+    function updateParallax() {
+      if (!parallaxContainer) return;
+
+      const scrollPosition = window.pageYOffset;
+      const layers = document.querySelectorAll('.parallax-layer');
+
+      const speeds = [0.2, 0.3, 0.4];
+
+      layers.forEach((layer, index) => {
+        const speed = speeds[index] || 0.2;
+        const yPos = -(scrollPosition * speed);
+        layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
+
+        if (scrollPosition > 0 && scrollPosition < window.innerHeight) {
+          const opacity = 1 - (scrollPosition / window.innerHeight * 0.3);
+          layer.style.opacity = opacity;
         }
+      });
     }
 
-    // ========== FUNÇÕES DO HEADER (PESQUISA E MENU) ==========
-    
-    // Sistema de pesquisa
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchToggle = document.getElementById('searchToggle');
-        const searchField = document.getElementById('searchField');
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
-        
-        if (searchToggle && searchField && searchInput) {
-            searchToggle.addEventListener('click', function() {
-                searchField.classList.toggle('expanded');
-                if (searchField.classList.contains('expanded')) {
-                    searchInput.focus();
-                } else {
-                    searchInput.value = '';
-                    searchResults.classList.remove('active');
-                }
-            });
-            
-        // Dados de exemplo para a pesquisa
-const searchData = [
-    {
+    // ========== FUNCIONALIDADES DO MENU SLIDE ==========
+    const menuTrigger = document.getElementById('menuTrigger');
+    const slideMenu = document.getElementById('slideMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuCloseBtn = document.getElementById('menuCloseBtn');
+
+    // Abrir/fechar menu
+    menuTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = menuTrigger.getAttribute('aria-expanded') === 'true';
+      menuTrigger.setAttribute('aria-expanded', !isExpanded);
+      menuTrigger.classList.toggle('active');
+      slideMenu.classList.toggle('open');
+      menuOverlay.classList.toggle('visible');
+    });
+
+    // Fechar menu pelo botão X
+    menuCloseBtn.addEventListener('click', () => {
+      closeMenu();
+    });
+
+    // Fechar menu ao clicar no overlay
+    menuOverlay.addEventListener('click', () => {
+      closeMenu();
+    });
+
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+
+    function closeMenu() {
+      menuTrigger.setAttribute('aria-expanded', 'false');
+      menuTrigger.classList.remove('active');
+      slideMenu.classList.remove('open');
+      menuOverlay.classList.remove('visible');
+    }
+
+    // ========== SISTEMA DE PESQUISA OTIMIZADO ==========
+    const searchToggle = document.getElementById('searchToggle');
+    const searchField = document.getElementById('searchField');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    // Dados de exemplo para a pesquisa
+    const searchData = [
+      {
         category: 'Academia',
         title: 'Opala fitness',
         description: 'Academia de musculação no centro',
         link: 'Opala-Fitness.html'
-    },
-    {
+      },
+      {
         category: 'Academia',
         title: 'vilafitness',
         description: 'Musculação e fitness',
         link: 'vilafitness.html'
-    },
-    {
+      },
+      {
         category: 'Academia',
-        title: 'Top X',
+        title: 'Rede-Fitness',
         description: 'Treinos de alto desempenho',
-        link: 'topx.html'
-    },
-    {
+        link: 'Redefitness.html'
+      },
+      {
         category: 'Página',
         title: 'Cadastro de Academias',
         description: 'Divulgue sua academia',
         link: 'academias-publicas.html'
-    },
-    {
+      },
+      {
         category: 'Página',
         title: 'Personal Trainer',
         description: 'Cadastro de personal trainers',
         link: 'cadastro_personal-sem-logar.html'
-    },
-    {
+      },
+      {
         category: 'Página',
         title: 'Promoções',
         description: 'Personal trainers e promoções',
-        link: 'Filtro_personal.html'
-    },
-    {
+        link: 'promocoes.html'
+      },
+      {
         category: 'Página',
         title: 'Cadastro de Personal',
         description: 'Cadastre-se como personal trainer',
         link: 'Cadastrar_personal.html'
-    },
-    {
+      },
+      {
         category: 'Página',
         title: 'Sobre nós',
         description: 'Conheça o Gym P2',
         link: 'Sobre_nós.html'
-    },
-    {
+      },
+      {
         category: 'Página',
         title: 'Configurações',
         description: 'Configurações da conta',
         link: 'config.html'
-    },
-    {
+      },
+      {
         category: 'Página',
         title: 'Login',
         description: 'Faça login na sua conta',
         link: 'login-gym.html'
-    },
-    {
+      },
+      {
         category: 'Página',
         title: 'Home',
         description: 'Página inicial',
         link: 'index.html'
-    }
-];
+      },
+      {
+        category: 'Market',
+        title: 'Gym Market',
+        description: 'Loja de suplementos e equipamentos',
+        link: '#gymMarket'
+      }
+    ];
 
-// Função de pesquisa
-searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase().trim();
-    
-    if (searchTerm.length === 0) {
+    // Toggle da barra de pesquisa
+    searchToggle.addEventListener('click', function () {
+      searchField.classList.toggle('expanded');
+      if (searchField.classList.contains('expanded')) {
+        searchInput.focus();
+      } else {
+        searchInput.value = '';
+        searchResults.classList.remove('active');
+      }
+    });
+
+    // Função de pesquisa com debounce
+    const performSearch = debounce((searchTerm) => {
+      if (searchTerm.length === 0) {
         searchResults.classList.remove('active');
         searchResults.innerHTML = '';
         return;
-    }
-    
-    // Filtrar resultados
-    const filteredResults = searchData.filter(item => 
-        item.title.toLowerCase().includes(searchTerm) || 
+      }
+
+      // Filtrar resultados
+      const filteredResults = searchData.filter(item =>
+        item.title.toLowerCase().includes(searchTerm) ||
         item.description.toLowerCase().includes(searchTerm) ||
         item.category.toLowerCase().includes(searchTerm)
-    );
-    
-    if (filteredResults.length === 0) {
+      );
+
+      if (filteredResults.length === 0) {
         searchResults.innerHTML = `
-            <div class="search-result-item">
-                <div class="result-title">Nenhum resultado encontrado</div>
-                <div class="result-description">Tente buscar por "academia", "personal" ou "cadastro"</div>
-            </div>
+          <div class="search-result-item">
+            <div class="result-title">Nenhum resultado encontrado</div>
+            <div class="result-description">Tente buscar por "academia", "personal" ou "market"</div>
+          </div>
         `;
         searchResults.classList.add('active');
         return;
-    }
-    
-    // Gerar HTML dos resultados
-    let resultsHTML = '';
-    filteredResults.forEach(result => {
+      }
+
+      // Gerar HTML dos resultados
+      let resultsHTML = '';
+      filteredResults.forEach(result => {
         resultsHTML += `
-            <a href="${result.link}" class="search-result-link">
-                <div class="search-result-item">
-                    <div class="result-category">${result.category}</div>
-                    <div class="result-title">${result.title}</div>
-                    <div class="result-description">${result.description}</div>
-                </div>
-            </a>
+          <a href="${result.link}" class="search-result-link">
+            <div class="search-result-item" role="option">
+              <div class="result-category">${result.category}</div>
+              <div class="result-title">${result.title}</div>
+              <div class="result-description">${result.description}</div>
+            </div>
+          </a>
         `;
+      });
+
+      searchResults.innerHTML = resultsHTML;
+      searchResults.classList.add('active');
+    }, 300);
+
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase().trim();
+      performSearch(searchTerm);
     });
-    
-    searchResults.innerHTML = resultsHTML;
-    searchResults.classList.add('active');
-});
 
-// Fechar resultados ao clicar fora
-document.addEventListener('click', (e) => {
-    if (!searchField.contains(e.target) && !searchToggle.contains(e.target)) {
+    // Fechar resultados ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!searchField.contains(e.target) && !searchToggle.contains(e.target)) {
         searchResults.classList.remove('active');
-    }
-});
-            
-            // Fechar pesquisa ao clicar fora
-            document.addEventListener('click', function(event) {
-                if (!searchField.contains(event.target) && !searchToggle.contains(event.target)) {
-                    searchField.classList.remove('expanded');
-                    searchResults.classList.remove('active');
-                }
-            });
+      }
+    });
+
+    // ========== SISTEMA DE LOGIN ==========
+    function checkUserLogin() {
+      const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
+
+      if (userData) {
+        try {
+          const user = JSON.parse(userData);
+          updateUIForLoggedUser(user);
+        } catch (error) {
+          console.error('Erro ao processar usuário:', error);
         }
+      }
+    }
+
+    function updateUIForLoggedUser(user) {
+      const loginBtn = document.getElementById('loginBtn');
+      if (loginBtn) {
+        const firstName = user.name.split(' ')[0];
+        loginBtn.innerHTML = `<i class="fas fa-user"></i> ${firstName}`;
+        loginBtn.href = "#";
+        loginBtn.onclick = showUserMenu;
+      }
+    }
+
+    function showUserMenu() {
+      showNotification('Menu do usuário - Em desenvolvimento');
+    }
+
+    // ========== NOTIFICAÇÕES ==========
+    function showNotification(message, type = 'success') {
+      // Remover notificações anteriores
+      document.querySelectorAll('.notification').forEach(n => n.remove());
+
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.style.cssText = `
+        background: ${type === 'success' ? 'rgba(0, 255, 64, 0.95)' : 'rgba(255, 68, 68, 0.95)'};
+        box-shadow: 0 10px 40px ${type === 'success' ? 'rgba(0, 255, 64, 0.4)' : 'rgba(255, 68, 68, 0.4)'};
+      `;
+
+      notification.textContent = message;
+      document.body.appendChild(notification);
+
+      setTimeout(() => {
+        notification.style.animation = 'fadeOutUp 0.5s ease forwards';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.remove();
+          }
+        }, 500);
+      }, 3000);
+    }
+
+    // ========== ANIMAÇÕES DE SCROLL ==========
+    function initScrollAnimations() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+      });
+
+      fadeElements.forEach(el => observer.observe(el));
+    }
+
+    // ========== EFEITOS DE HOVER NOS CARDS ==========
+    function initCardHoverEffects() {
+      const cards = document.querySelectorAll('.academy-card1, .market-card');
+
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateY = (x - centerX) / 25;
+          const rotateX = (centerY - y) / 25;
+
+          if (card.classList.contains('academy-card1')) {
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-20px)`;
+          }
+        });
+
+        card.addEventListener('mouseleave', () => {
+          if (card.classList.contains('academy-card1')) {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+          }
+        });
+      });
+    }
+
+    // ========== SMOOTH SCROLL ==========
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // ========== LOCALIZAÇÃO DE ACADEMIAS ==========
+    const academies = [
+      {
+        name: "Opala-Fitness",
+        type: "musculacao",
+        location: "centro",
+        price: 80,
+        coords: { lat: -4.4248, lng: -41.4582 }
+      },
+      {
+        name: "Rede-Fit",
+        type: "musculacao",
+        location: "centro",
+        price: 80,
+        coords: { lat: -4.4255, lng: -41.4578 }
+      },
+      {
+        name: "Vila-Fitness",
+        type: "musculacao",
+        location: "centro",
+        price: 70,
+        coords: { lat: -4.4239, lng: -41.4591 }
+      }
+    ];
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Raio da Terra em km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return R * c;
+    }
+
+    function findNearbyAcademies(userLat, userLng, radiusKm = 5) {
+      return academies.filter(academy => {
+        const distance = calculateDistance(
+          userLat, userLng,
+          academy.coords.lat, academy.coords.lng
+        );
+        return distance <= radiusKm;
+      });
+    }
+
+    // ========== CONFIGURAÇÕES GLOBAIS ==========
+    function applyGlobalSettings() {
+      const savedTheme = localStorage.getItem('gym-theme') || 'dark';
+      const savedFontSize = localStorage.getItem('gym-fontSize') || 'medium';
+
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+      }
+
+      applyFontSize(savedFontSize);
+    }
+
+    function applyFontSize(size) {
+      const sizes = {
+        'small': { h1: '32px', normal: '14px' },
+        'medium': { h1: '42px', normal: '16px' },
+        'large': { h1: '52px', normal: '18px' }
+      };
+
+      const currentSizes = sizes[size];
+      if (currentSizes) {
+        document.querySelectorAll('h1').forEach(el => {
+          el.style.fontSize = currentSizes.h1;
+        });
+
+        document.querySelectorAll('p, .nav-link').forEach(el => {
+          el.style.fontSize = currentSizes.normal;
+        });
+      }
+    }
+
+    // ========== FETCH COM TIMEOUT ==========
+    async function fetchWithTimeout(resource, options = {}) {
+      const { timeout = 8000 } = options;
       
-            
-            // Função para obter iniciais do nome
-            function getInitials(name) {
-                return name
-                    .split(' ')
-                    .map(n => n[0])
-                    .slice(0, 2)
-                    .join('')
-                    .toUpperCase();
-            }
-            
-            // Configurar dropdown do usuário
-            function setupUserDropdown() {
-                const userContainer = document.getElementById('userHeaderContainer');
-                const dropdownMenu = document.getElementById('userDropdownMenu');
-                const logoutBtn = document.getElementById('logoutBtnHeader'); // ID ALTERADO AQUI
-                
-                if (!userContainer || !dropdownMenu || !logoutBtn) {
-                    console.log('⚠️ Elementos do dropdown não encontrados');
-                    return;
-                }
-                
-                // Toggle do dropdown
-                userContainer.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const isActive = dropdownMenu.style.opacity === '1';
-                    
-                    if (isActive) {
-                        dropdownMenu.style.opacity = '0';
-                        dropdownMenu.style.visibility = 'hidden';
-                        dropdownMenu.style.transform = 'translateY(-10px)';
-                    } else {
-                        dropdownMenu.style.opacity = '1';
-                        dropdownMenu.style.visibility = 'visible';
-                        dropdownMenu.style.transform = 'translateY(0)';
-                    }
-                });
-                
-                // Fechar dropdown ao clicar fora
-                document.addEventListener('click', (e) => {
-                    if (!userContainer.contains(e.target)) {
-                        dropdownMenu.style.opacity = '0';
-                        dropdownMenu.style.visibility = 'hidden';
-                        dropdownMenu.style.transform = 'translateY(-10px)';
-                    }
-                });
-                
-                // Prevenir fechamento ao clicar no dropdown
-                dropdownMenu.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                });
-                
-                // Hover effect no container
-                userContainer.addEventListener('mouseenter', () => {
-                    userContainer.style.background = 'rgba(0, 255, 136, 0.2)';
-                    userContainer.style.borderColor = 'rgba(0, 255, 136, 0.5)';
-                    userContainer.style.transform = 'translateY(-2px)';
-                    userContainer.style.boxShadow = '0 4px 15px rgba(0, 255, 136, 0.3)';
-                });
-                
-                userContainer.addEventListener('mouseleave', () => {
-                    userContainer.style.background = 'rgba(0, 255, 136, 0.1)';
-                    userContainer.style.borderColor = 'rgba(0, 255, 136, 0.3)';
-                    userContainer.style.transform = 'translateY(0)';
-                    userContainer.style.boxShadow = 'none';
-                });
-                
-                // Hover nos itens do menu
-                const menuItems = dropdownMenu.querySelectorAll('a, #logoutBtnHeader');
-                menuItems.forEach(item => {
-                    item.addEventListener('mouseenter', () => {
-                        item.style.background = 'rgba(0, 255, 136, 0.1)';
-                    });
-                    item.addEventListener('mouseleave', () => {
-                        item.style.background = 'transparent';
-                    });
-                });
-                
-                // EVENTO DE LOGOUT CORRIGIDO
-                logoutBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    
-                    if (confirm('Deseja realmente sair da sua conta?')) {
-                        console.log('🚪 Fazendo logout do header...');
-                        
-                        // Limpar TODOS os dados de sessão
-                        localStorage.removeItem('gymp2_current_user');
-                        localStorage.removeItem('currentUser');
-                        sessionStorage.removeItem('gymp2_token');
-                        sessionStorage.removeItem('gymp2_user');
-                        
-                        // Mostrar feedback
-                        if (window.notifications) {
-                            window.notifications.success('Logout realizado com sucesso!');
-                        } else {
-                            alert('Logout realizado!');
-                        }
-                        
-                        // Remover o dropdown imediatamente
-                        const userContainer = document.getElementById('userHeaderContainer');
-                        if (userContainer) {
-                            userContainer.remove();
-                        }
-                        
-                        // Recriar o botão de login
-                        recreateLoginButton();
-                        
-                        // Recarregar a página após 1 segundo para sincronizar tudo
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 1000);
-                    }
-                });
-                
-                console.log('✅ Dropdown do usuário configurado');
-            }
-            
-            // FUNÇÃO PARA RECRIAR BOTÃO DE LOGIN
-            function recreateLoginButton() {
-                const rightControls = document.querySelector('.right-controls');
-                if (!rightControls) return;
-                
-                // Criar botão de login
-                const loginBtn = document.createElement('div');
-                loginBtn.className = 'gym-access-btn';
-                loginBtn.innerHTML = `
-                    <a href="login-gym.html" style="color: #00ff88; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <span>Login</span>
-                    </a>
-                `;
-                
-                // Inserir no lugar correto
-                const menuTrigger = document.getElementById('menuTrigger');
-                if (menuTrigger) {
-                    menuTrigger.parentNode.insertBefore(loginBtn, menuTrigger);
-                } else {
-                    rightControls.appendChild(loginBtn);
-                }
-                
-                console.log('✅ Botão de login recriado');
-            }
-            
-        })();
-        // NÃO ADICIONE A FUNÇÃO logout() AQUI - ELA FOI REMOVIDA
-    </script>
-    
-    <script>
-        // ========== DEBUG E VERIFICAÇÃO ==========
-        console.log('🚀 Script de login carregado!');
-        
-        // Verificar se há usuário logado imediatamente
-        const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
-        console.log('📦 Dados do usuário no localStorage:', userData);
-        
-        if (userData) {
-            try {
-                const user = JSON.parse(userData);
-                console.log('👤 Usuário parseado:', user);
-            } catch (error) {
-                console.error('❌ Erro ao fazer parse:', error);
-            }
-        }
-        
-        // ========== SISTEMA PRINCIPAL ATUALIZADO ==========
-        function initLoginSystem() {
-            console.log('🔧 Iniciando sistema de login...');
-            
-            const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
-            
-            if (userData) {
-                try {
-                    const user = JSON.parse(userData);
-                    console.log(' Usuário logado detectado:', user.name);
-                    updateUIForLoggedUser(user);
-                } catch (error) {
-                    console.error(' Erro ao processar usuário:', error);
-                }
-            } else {
-                console.log('ℹ️ Nenhum usuário logado');
-                resetUIForLoggedOut();
-            }
-        }
-        
-        // ========== ATUALIZAR INTERFACE PARA USUÁRIO LOGADO ==========
-        function updateUIForLoggedUser(user) {
-            console.log('🎨 Atualizando UI para usuário logado:', user.name);
-            
-            // 1. Atualizar header principal
-            updateMainHeader(user);
-            
-            // 2. Atualizar menu hamburguer
-            updateHamburgerMenu(user);
-            
-            console.log('✅ UI atualizada com sucesso!');
-        }
-        
-        // ========== ATUALIZAR HEADER PRINCIPAL ==========
-        function updateMainHeader(user) {
-            const rightControls = document.querySelector('.right-controls');
-            if (!rightControls) {
-                console.error('❌ .right-controls não encontrado');
-                return;
-            }
-        
-            // Remover botão Login existente
-            const loginButtons = rightControls.querySelectorAll('.gym-access-btn');
-            loginButtons.forEach(btn => {
-                if (btn.textContent.includes('Login') || btn.querySelector('a')?.textContent.includes('Login')) {
-                    console.log('🗑 Removendo botão Login do header');
-                    btn.remove();
-                }
-            });
-        
-            // Verificar se já existe o componente de usuário
-            if (document.getElementById('userHeaderContainer')) {
-                console.log('ℹ️ Header de usuário já existe');
-                return;
-            }
-        
-            // Criar componente do usuário
-            const initials = user.name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
-            const firstName = user.name.split(' ')[0];
-        
-            const userHTML = `
-                <div class="user-header-container" id="userHeaderContainer" style="
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    background: rgba(0, 255, 136, 0.1);
-                    border: 2px solid rgba(0, 255, 136, 0.3);
-                    border-radius: 30px;
-                    padding: 6px 16px 6px 6px;
-                    transition: all 0.3s ease;
-                    cursor: pointer;
-                    position: relative;
-                ">
-                    <div class="user-avatar" style="
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50%;
-                        background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-weight: 700;
-                        font-size: 16px;
-                        color: #000;
-                        border: 2px solid #fff;
-                    ">${initials}</div>
-                    
-                    <span class="user-name-text" style="
-                        font-size: 14px;
-                        font-weight: 600;
-                        color: #fff;
-                    ">${firstName}</span>
-                    
-                    <div class="user-dropdown-menu" id="userDropdownMenu" style="
-                        position: absolute;
-                        top: calc(100% + 10px);
-                        right: 0;
-                        background: #1a1a1a;
-                        border: 2px solid rgba(0, 255, 136, 0.3);
-                        border-radius: 16px;
-                        padding: 12px;
-                        min-width: 220px;
-                        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-                        opacity: 0;
-                        visibility: hidden;
-                        transform: translateY(-10px);
-                        transition: all 0.3s ease;
-                        z-index: 3000;
-                    ">
-                        <div style="padding: 12px; border-bottom: 1px solid rgba(0, 255, 136, 0.2); margin-bottom: 8px;">
-                            <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px;">${user.name}</div>
-                            <div style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">${user.email || 'usuario@gymp2.com'}</div>
-                        </div>
-                        
-                        <a href="#perfil" style="
-                            display: flex;
-                            align-items: center;
-                            gap: 12px;
-                            padding: 12px;
-                            border-radius: 10px;
-                            cursor: pointer;
-                            transition: all 0.2s ease;
-                            color: #fff;
-                            text-decoration: none;
-                            margin-bottom: 4px;
-                        ">
-                            <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                            </svg>
-                            Meu Perfil
-                        </a>
-                        
-                        <div id="logoutBtn" style="
-                            display: flex;
-                            align-items: center;
-                            gap: 12px;
-                            padding: 12px;
-                            border-radius: 10px;
-                            cursor: pointer;
-                            transition: all 0.2s ease;
-                            color: #ff4444;
-                            border-top: 1px solid rgba(255, 68, 68, 0.2);
-                            margin-top: 8px;
-                        ">
-                            <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
-                            </svg>
-                            Sair
-                        </div>
-                    </div>
-                </div>
-            `;
-        
-            // Inserir antes do menu hamburguer
-            const menuTrigger = document.getElementById('menuTrigger');
-            if (menuTrigger) {
-                menuTrigger.insertAdjacentHTML('beforebegin', userHTML);
-                console.log('✅ Header de usuário inserido no header principal');
-            } else {
-                rightControls.insertAdjacentHTML('beforeend', userHTML);
-                console.log('✅ Header de usuário inserido no final do header');
-            }
-        
-            // Configurar eventos do dropdown
-            setupUserDropdownEvents();
-        }
-        
-        // ========== ATUALIZAR MENU HAMBURGUER ==========
-        function updateHamburgerMenu(user) {
-            console.log('🍔 Atualizando menu hamburguer...');
-            
-            const navigationList = document.querySelector('.navigation-list');
-            if (!navigationList) {
-                console.error('❌ .navigation-list não encontrado');
-                return;
-            }
-        
-            // Encontrar item de Login
-            const navItems = navigationList.querySelectorAll('.nav-item');
-            let loginItem = null;
-            
-            navItems.forEach(item => {
-                const link = item.querySelector('.nav-link');
-                if (link && (link.textContent.trim() === 'Login' || link.getAttribute('href') === '#espaço-cliente')) {
-                    loginItem = item;
-                    console.log('🔍 Item de login encontrado no menu');
-                }
-            });
-        
-            if (loginItem) {
-                const firstName = user.name.split(' ')[0];
-                
-                // Substituir Login por Perfil
-                loginItem.innerHTML = `
-                    <a href="#perfil" class="nav-link" style="color: #00ff88; font-weight: 700; background: rgba(0, 255, 136, 0.1); border-radius: 8px; margin: 5px 0; padding: 12px 15px !important;">
-                        <i class="fas fa-user" style="margin-right: 10px;"></i>
-                        Meu Perfil (${firstName})
-                    </a>
-                `;
-                console.log('✅ Login substituído por Perfil no menu');
-        
-                // Remover logout existente
-                const existingLogout = document.getElementById('menuLogoutBtn');
-                if (existingLogout) {
-                    existingLogout.closest('.nav-item').remove();
-                    console.log('🗑 Logout anterior removido');
-                }
-        
-                // Adicionar item Sair
-                const logoutItem = document.createElement('li');
-                logoutItem.className = 'nav-item';
-                logoutItem.innerHTML = `
-                    <a href="#logout" class="nav-link" style="color: #ff4444; background: rgba(255, 68, 68, 0.1); border-radius: 8px; margin: 5px 0; padding: 12px 15px !important;" id="menuLogoutBtn">
-                        <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>
-                        Sair
-                    </a>
-                `;
-                
-                navigationList.appendChild(logoutItem);
-                console.log('✅ Item Sair adicionado ao menu');
-        
-                // Configurar evento de logout
-                const menuLogoutBtn = document.getElementById('menuLogoutBtn');
-                if (menuLogoutBtn) {
-                    menuLogoutBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        if (confirm('Deseja realmente sair da sua conta?')) {
-                            console.log('🚪 Fazendo logout...');
-                            localStorage.removeItem('gymp2_current_user');
-                            localStorage.removeItem('currentUser');
-                            alert('Logout realizado com sucesso!');
-                            window.location.reload();
-                        }
-                    });
-                }
-            } else {
-                console.log('⚠️ Item de login não encontrado no menu hamburguer');
-            }
-        }
-        
-        // ========== CONFIGURAR EVENTOS DO DROPDOWN ==========
-        function setupUserDropdownEvents() {
-            const userContainer = document.getElementById('userHeaderContainer');
-            const dropdownMenu = document.getElementById('userDropdownMenu');
-            const logoutBtn = document.getElementById('logoutBtn');
-        
-            if (!userContainer || !dropdownMenu || !logoutBtn) {
-                console.error('❌ Elementos do dropdown não encontrados');
-                return;
-            }
-        
-            // Toggle dropdown
-            userContainer.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const isVisible = dropdownMenu.style.opacity === '1';
-                
-                if (isVisible) {
-                    dropdownMenu.style.opacity = '0';
-                    dropdownMenu.style.visibility = 'hidden';
-                    dropdownMenu.style.transform = 'translateY(-10px)';
-                } else {
-                    dropdownMenu.style.opacity = '1';
-                    dropdownMenu.style.visibility = 'visible';
-                    dropdownMenu.style.transform = 'translateY(0)';
-                }
-            });
-        
-            // Fechar ao clicar fora
-            document.addEventListener('click', () => {
-                dropdownMenu.style.opacity = '0';
-                dropdownMenu.style.visibility = 'hidden';
-                dropdownMenu.style.transform = 'translateY(-10px)';
-            });
-        
-            // Logout
-            logoutBtn.addEventListener('click', () => {
-                if (confirm('Deseja realmente sair da sua conta?')) {
-                    console.log('🚪 Fazendo logout...');
-                    localStorage.removeItem('currentUser');
-                    localStorage.removeItem('gymp2_current_user');
-                    alert('Logout realizado com sucesso!');
-                    window.location.reload();
-                }
-            });
-        
-            console.log('✅ Eventos do dropdown configurados');
-        }
-        
-        // ========== RESTAURAR INTERFACE PADRÃO ==========
-        function resetUIForLoggedOut() {
-            console.log('🔄 Restaurando interface para usuário deslogado...');
-            
-            // Remover header de usuário se existir
-            const userHeader = document.getElementById('userHeaderContainer');
-            if (userHeader) {
-                userHeader.remove();
-                console.log('🗑 Header de usuário removido');
-            }
-            
-            // Restaurar menu hamburguer será feito automaticamente ao recarregar
-        }
-        
-        // ========== INICIAR SISTEMA ==========
-        
-        // Executar quando a página carregar
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('📄 DOM carregado, iniciando sistema...');
-            setTimeout(initLoginSystem, 100);
-        });
-        
-        // Executar também se a página já estiver carregada
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            console.log('⚡ Página já carregada, iniciando sistema...');
-            setTimeout(initLoginSystem, 100);
-        }
-        
-        // Observar mudanças no localStorage
-        window.addEventListener('storage', function(e) {
-            if ((e.key === 'currentUser' || e.key === 'gymp2_current_user')) {
-                console.log('🔄 Mudança no localStorage detectada, recarregando...');
-                setTimeout(() => {
-                    window.location.reload();
-                }, 500);
-            }
-        });
-        
-        console.log('🎯 Sistema de login carregado e pronto!');
-    </script>
-    
-    <!--JavaScript para aplicar configurações globais-->
-    <script>
-        // Aplicar configurações globais - PARA TODAS AS PÁGINAS
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Aplicando configurações globais...');
-            applyGlobalSettings();
-            
-            // Verificar se as configurações foram aplicadas
-            setTimeout(() => {
-                console.log('Configurações aplicadas:', {
-                    tema: localStorage.getItem('gym-theme'),
-                    fonte: localStorage.getItem('gym-fontSize'),
-                    bodyClass: document.body.className
-                });
-            }, 500);
-        });
-    
-        function applyGlobalSettings() {
-            // Carregar configurações salvas
-            const savedTheme = localStorage.getItem('gym-theme') || 'dark';
-            const savedFontSize = localStorage.getItem('gym-fontSize') || 'medium';
-            
-            console.log('Configurações carregadas:', { savedTheme, savedFontSize });
-            
-            // Aplicar tema
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-mode');
-                console.log('Modo claro aplicado');
-            } else {
-                document.body.classList.remove('light-mode');
-                console.log('Modo escuro aplicado');
-            }
-            
-            // Aplicar tamanho da fonte
-            applyFontSize(savedFontSize);
-        }
-    
-        function applyFontSize(size) {
-            const sizes = {
-                'small': { 
-                    h1: '32px', h2: '24px', h3: '18px',
-                    normal: '14px', small: '12px',
-                    button: '14px'
-                },
-                'medium': { 
-                    h1: '42px', h2: '28px', h3: '22px',
-                    normal: '16px', small: '14px',
-                    button: '16px'
-                },
-                'large': { 
-                    h1: '52px', h2: '32px', h3: '26px',
-                    normal: '18px', small: '16px',
-                    button: '18px'
-                }
-            };
-    
-            const currentSizes = sizes[size];
-            
-            console.log('Aplicando tamanho de fonte:', size, currentSizes);
-            
-            // Aplicar a todos os elementos
-            setTimeout(() => {
-                // Títulos principais
-                document.querySelectorAll('h1').forEach(el => {
-                    el.style.fontSize = currentSizes.h1;
-                });
-                
-                // Títulos secundários
-                document.querySelectorAll('h2').forEach(el => {
-                    el.style.fontSize = currentSizes.h2;
-                });
-                
-                // Títulos terciários
-                document.querySelectorAll('h3').forEach(el => {
-                    el.style.fontSize = currentSizes.h3;
-                });
-                
-                // Textos normais
-                document.querySelectorAll('p, .setting-description, .feedback-text, .nav-link, .result-title, .profile-info p, .feedback-text').forEach(el => {
-                    el.style.fontSize = currentSizes.normal;
-                });
-                
-                // Botões
-                document.querySelectorAll('.gym-access-btn, .edit-profile-btn, .menu-search-btn').forEach(el => {
-                    el.style.fontSize = currentSizes.button;
-                });
-                
-                // Textos pequenos
-                document.querySelectorAll('.feedback-date, .setting-description, small, .result-description, .feedback-date').forEach(el => {
-                    el.style.fontSize = currentSizes.small;
-                });
-                
-                // Estatísticas
-                document.querySelectorAll('.stat-box p').forEach(el => {
-                    el.style.fontSize = currentSizes.h2;
-                });
-                
-                document.querySelectorAll('.stat-box h3').forEach(el => {
-                    el.style.fontSize = currentSizes.normal;
-                });
-    
-                console.log('Tamanhos de fonte aplicados com sucesso');
-            }, 100);
-        }
-    
-        // Função para forçar atualização (útil para debugging)
-        function forceUpdateSettings() {
-            console.log('Forçando atualização das configurações...');
-            applyGlobalSettings();
-        }
-    
-        // Adicionar listener para mudanças no localStorage (opcional)
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'gym-theme' || e.key === 'gym-fontSize') {
-                console.log('Configurações alteradas em outra aba, aplicando...');
-                applyGlobalSettings();
-            }
-        });
-    </script>
-    
-    <script>
-        // ========== FUNÇÃO PARA REDIRECIONAR PARA PERFIL ==========
-        function redirectToProfile() {
-            const userData = localStorage.getItem('currentUser') || localStorage.getItem('gymp2_current_user');
-            
-            if (userData) {
-                try {
-                    const user = JSON.parse(userData);
-                    console.log(' Redirecionando para perfil do usuário:', user.name);
-                    window.location.href = 'perfil.html';
-                } catch (error) {
-                    console.error(' Erro ao redirecionar:', error);
-                    window.location.href = 'login-gym.html';
-                }
-            } else {
-                alert('Você precisa fazer login primeiro!');
-                window.location.href = 'login-gym.html';
-            }
-        }
-    </script>
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), timeout);
 
-
-<script>
-// Adicionar este script no perfil.html
-document.addEventListener('DOMContentLoaded', async function() {
-    console.log('📋 Página do perfil carregada');
-    await checkAccountDeletionStatus();
-});
-
-async function checkAccountDeletionStatus() {
-    try {
-        console.log('🔍 Verificando status de exclusão da conta...');
-        
-        // Verificar primeiro no localStorage (sistema simulado)
-        const savedStatus = localStorage.getItem('gymp2_deletion_status');
-        
-        if (savedStatus) {
-            console.log('📁 Status encontrado no localStorage');
-            const statusData = JSON.parse(savedStatus);
-            
-            if (statusData.hasPendingDeletion && statusData.deletionRecord) {
-                const banner = document.getElementById('deletionWarningBanner');
-                const daysSpan = document.getElementById('profileDaysRemaining');
-                
-                if (banner && daysSpan) {
-                    const daysRemaining = statusData.deletionRecord.daysRemaining || 0;
-                    daysSpan.textContent = daysRemaining;
-                    banner.style.display = 'block';
-                    
-                    console.log(`⚠️ Exclusão pendente: ${daysRemaining} dias restantes`);
-                    
-                    // Se restarem menos de 5 dias, alerta mais visível
-                    if (daysRemaining <= 5) {
-                        banner.querySelector('div').style.background = 'linear-gradient(90deg, #ff3b30, #ff1a00)';
-                    }
-                    
-                    return;
-                }
-            }
-        }
-        
-        // Se chegou aqui, não há exclusão pendente ou não encontrou os elementos
-        console.log('✅ Nenhuma exclusão pendente encontrada');
-        
-        // CASO QUEIRA USAR API REAL (descomente e ajuste):
-        /*
-        const token = localStorage.getItem('gymp2_token') || 
-                     sessionStorage.getItem('gymp2_token');
-        
-        if (!token) {
-            console.log('❌ Token não encontrado');
-            return;
-        }
-        
-        const response = await fetch('http://localhost:3000/api/account/deletion-status', {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
+      try {
+        const response = await fetch(resource, {
+          ...options,
+          signal: controller.signal  
         });
         
-        if (response.ok) {
-            const data = await response.json();
-            
-            if (data.hasPendingDeletion) {
-                const banner = document.getElementById('deletionWarningBanner');
-                const daysSpan = document.getElementById('profileDaysRemaining');
-                
-                if (banner && daysSpan) {
-                    daysSpan.textContent = data.deletionRecord.daysRemaining;
-                    banner.style.display = 'block';
-                    
-                    // Salvar no localStorage para cache
-                    localStorage.setItem('gymp2_deletion_status', JSON.stringify(data));
-                }
-            }
-        }
-        */
-        
-    } catch (error) {
-        console.error('❌ Erro ao verificar status:', error);
-        // Não mostrar erro ao usuário, apenas no console
+        clearTimeout(id);
+        return response;
+      } catch (error) {
+        clearTimeout(id);
+        throw error;
+      }
     }
-}
 
-function closeWarningBanner() {
-    const banner = document.getElementById('deletionWarningBanner');
-    if (banner) {
-        banner.style.display = 'none';
-        console.log('🔒 Banner fechado pelo usuário');
-        
-        // Salvar preferência do usuário (não mostrar novamente nesta sessão)
-        sessionStorage.setItem('hideDeletionBanner', 'true');
+    // ========== INICIALIZAÇÃO ==========
+    document.addEventListener('DOMContentLoaded', function () {
+      initScrollAnimations();
+      initCardHoverEffects();
+      checkUserLogin();
+      applyGlobalSettings();
+
+      // Efeito de digitação no título
+      const heroTitle = document.querySelector('.hero-title');
+      if (heroTitle && window.innerWidth > 768) {
+        const text = heroTitle.textContent;
+        heroTitle.textContent = '';
+        let i = 0;
+
+        function typeWriter() {
+          if (i < text.length) {
+            heroTitle.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 30);
+          }
+        }
+
+        setTimeout(typeWriter, 500);
+      }
+
+      // Adicionar evento de scroll para parallax com debounce
+      const debouncedParallax = debounce(updateParallax, 10);
+      window.addEventListener('scroll', debouncedParallax);
+      window.addEventListener('resize', debouncedParallax);
+      updateParallax();
+
+      // Criar mais partículas
+      createMoreParticles();
+    });
+
+    // ========== CRIAÇÃO DE MAIS PARTÍCULAS ==========
+    function createMoreParticles() {
+      const parallaxContainer = document.getElementById('parallaxContainer');
+      if (!parallaxContainer) return;
+
+      for (let i = 0; i < 15; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.cssText = `
+          top: ${Math.random() * 100}%;
+          left: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * -20}s;
+          animation-duration: ${8 + Math.random() * 10}s;
+          opacity: ${0.5 + Math.random() * 0.5};
+          width: ${4 + Math.random() * 4}px;
+          height: ${4 + Math.random() * 4}px;
+        `;
+
+        const layer = Math.floor(Math.random() * 3) + 1;
+        parallaxContainer.querySelector(`.layer-${layer}`).appendChild(particle);
+      }
     }
-}
 
-// Verificar se usuário já fechou o banner nesta sessão
-if (sessionStorage.getItem('hideDeletionBanner') === 'true') {
-    const banner = document.getElementById('deletionWarningBanner');
-    if (banner) banner.style.display = 'none';
-}
-
-// Atualizar banner quando houver mudanças no localStorage (de outras páginas)
-window.addEventListener('storage', function(event) {
-    if (event.key === 'gymp2_deletion_status') {
-        console.log('🔄 Status atualizado, verificando novamente...');
-        checkAccountDeletionStatus();
-    }
-});
-
-// Também ouvir eventos personalizados (se usar entre páginas)
-window.addEventListener('accountStatusChanged', function() {
-    console.log('🔄 Evento de mudança recebido, verificando status...');
-    checkAccountDeletionStatus();
-});
-
-
-</script>
+    console.log('🚀 Gym P2 - Site otimizado carregado com sucesso!');
+  </script>
 </body>
+
 </html>
